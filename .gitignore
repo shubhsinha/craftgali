@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.next/
+
+# Build
+build/
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Go
+*.exe
+*.test
+*.out
+
+# Flutter
+.dart_tool/
+.packages
+.pub-cache/
+build/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
