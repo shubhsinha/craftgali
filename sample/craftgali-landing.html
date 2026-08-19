@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CraftGali — Handmade art and decor from your neighborhood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terracotta:#659287;
+    --terracotta-dark:#4E7367;
+    --clay:#88BDA4;
+    --ochre:#B1D3B9;
+    --cream:#E6F2DD;
+    --cream2:#F0F7EC;
+    --linen:#DCEEDD;
+    --bark:#3D5F53;
+    --bark-soft:#6E8B80;
+    --sage:#E6F2DD;
+    --sage-bg:#EAF4E6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Work Sans',sans-serif;
+    background:var(--cream);
+    color:var(--bark);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;color:#000;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+  button, .btn{font-family:'Work Sans',sans-serif;font-weight:600;cursor:pointer;border:none;font-size:15px;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,243,233,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(59,42,32,0.08);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1160px;margin:0 auto;}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:21px;color:var(--terracotta-dark);letter-spacing:-0.01em;}
+  .nav-links{display:flex;gap:32px;align-items:center;}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--bark-soft);}
+  .nav-links a:hover{color:var(--terracotta-dark);}
+  .nav-cta{background:var(--terracotta);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;}
+  .nav-cta:hover{background:var(--terracotta-dark);}
+  .nav-mobile-hide{display:flex;}
+  @media(max-width:760px){.nav-mobile-hide{display:none;}}
+
+  /* ---------- signature lane spine ---------- */
+  /* the winding line is the page's one deliberate signature: a "gali" (lane) you walk down
+     as you scroll, visually threading the hero into the nearby-listings strip below. */
+  .lane-wrap{position:relative;}
+  .lane-svg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:100%;z-index:0;pointer-events:none;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:88px 32px 40px;
+    text-align:center;
+    position:relative;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;color:var(--terracotta-dark);
+    background:var(--linen);padding:7px 16px;border-radius:20px;
+    margin-bottom:24px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--terracotta);display:inline-block;}
+  .hero h1{
+    font-size:56px;line-height:1.08;letter-spacing:-0.01em;
+    max-width:760px;margin:0 auto 20px;
+  }
+  .hero h1 em{font-style:italic;color:var(--terracotta);}
+  .hero p.sub{
+    font-size:18px;color:var(--bark-soft);max-width:520px;margin:0 auto 36px;
+  }
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
+  .btn-primary{background:var(--terracotta);color:#fff;padding:15px 30px;border-radius:9px;font-size:15.5px;}
+  .btn-primary:hover{background:var(--terracotta-dark);}
+  .btn-secondary{background:transparent;color:var(--bark);padding:14px 28px;border-radius:9px;border:1.5px solid rgba(59,42,32,0.22);font-size:15.5px;}
+  .btn-secondary:hover{border-color:var(--bark);}
+  .hero-note{font-size:13px;color:var(--bark-soft);}
+
+  @media(max-width:640px){
+    .hero{padding:56px 20px 28px;}
+    .hero h1{font-size:36px;}
+    .hero p.sub{font-size:16px;}
+  }
+
+  /* ---------- explore your gali (nearby listings) ---------- */
+  .explore{padding:36px 0 64px;position:relative;}
+  .explore-head{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    margin-bottom:20px;flex-wrap:wrap;gap:12px;
+  }
+  .explore-head h2{font-size:26px;}
+  .location-pill{
+    position:relative;
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;color:var(--bark-soft);background:var(--sage-bg);
+    padding:6px 14px;border-radius:20px;font-weight:500;
+    border:none;cursor:pointer;
+  }
+  .location-pill:hover{background:#dde5d1;}
+
+  .loc-pop{
+    display:none;position:absolute;top:calc(100% + 10px);right:0;z-index:60;
+    width:280px;background:#fff;border-radius:14px;
+    border:1px solid rgba(59,42,32,0.1);
+    box-shadow:0 10px 30px rgba(59,42,32,0.12);
+    padding:16px;text-align:left;
+  }
+  .loc-pop.open{display:block;}
+  .loc-pop-label{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--bark-soft);margin-bottom:10px;}
+  .scope-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+  .scope-chip{
+    font-size:12.5px;font-weight:500;color:var(--bark-soft);
+    background:var(--cream2);border:1px solid transparent;border-radius:8px;
+    padding:7px 11px;cursor:pointer;
+  }
+  .scope-chip.active{background:var(--terracotta);color:#fff;}
+  .radius-row{display:flex;gap:6px;margin-bottom:12px;}
+  .radius-chip{
+    flex:1;text-align:center;font-size:12px;font-weight:500;color:var(--bark-soft);
+    background:var(--cream2);border-radius:8px;padding:7px 0;cursor:pointer;
+  }
+  .radius-chip.active{background:var(--linen);color:var(--terracotta-dark);font-weight:600;}
+  .loc-note{font-size:11.5px;color:var(--bark-soft);line-height:1.5;margin-bottom:14px;}
+  .loc-note strong{color:var(--sage);}
+  .loc-apply{
+    width:100%;background:var(--terracotta);color:#fff;border-radius:8px;
+    padding:10px 0;font-size:13.5px;
+  }
+  .loc-apply:hover{background:var(--terracotta-dark);}
+  .explore-scroll{
+    display:flex;gap:16px;overflow-x:auto;padding:6px 4px 14px;
+    scroll-snap-type:x mandatory;
+  }
+  .explore-scroll::-webkit-scrollbar{height:6px;}
+  .explore-scroll::-webkit-scrollbar-thumb{background:var(--linen);border-radius:10px;}
+  .p-card{
+    flex:0 0 220px;scroll-snap-align:start;
+    background:#fff;border-radius:14px;overflow:hidden;
+    border:1px solid rgba(59,42,32,0.08);
+  }
+  .p-thumb{height:150px;display:flex;align-items:flex-end;padding:10px;position:relative;}
+  .p-badge{
+    font-size:10.5px;color:#fff;background:rgba(59,42,32,0.75);
+    padding:4px 9px;border-radius:20px;font-weight:600;
+  }
+  .p-body{padding:13px 14px 15px;}
+  .p-title{font-family:'Fraunces',serif;font-weight:600;font-size:14.5px;margin-bottom:3px;}
+  .p-meta{font-size:12px;color:var(--bark-soft);margin-bottom:9px;}
+  .p-foot{display:flex;justify-content:space-between;align-items:baseline;}
+  .p-price{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--terracotta-dark);}
+  .p-dist{font-size:11px;color:var(--sage);}
+
+  /* fallback empty-state note for thin-inventory markets — shown instead of the scroll
+     row when fewer than ~6 nearby listings exist; swaps to a "popular across India" set. */
+  .explore-fallback{
+    display:none;background:var(--cream2);border-radius:14px;padding:22px;
+    font-size:13.5px;color:var(--bark-soft);text-align:center;
+  }
+
+  /* ---------- discover tabs ---------- */
+  .discover{padding:56px 0;background:var(--cream2);}
+  .discover .wrap > p.kicker{
+    font-size:13px;font-weight:600;color:var(--terracotta-dark);
+    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;
+  }
+  .discover h2{font-size:28px;max-width:480px;margin-bottom:32px;}
+  .discover-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .d-card{
+    background:#fff;border-radius:14px;padding:22px 18px;
+    border:1px solid rgba(59,42,32,0.08);
+  }
+  .d-icon{
+    width:38px;height:38px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--bark);
+    margin-bottom:16px;
+  }
+  .d-card h3{font-size:16px;margin-bottom:6px;}
+  .d-card p{font-size:13px;color:var(--bark-soft);}
+  @media(max-width:820px){.discover-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.discover-grid{grid-template-columns:1fr;}}
+
+  /* ---------- how it works ---------- */
+  .how{padding:64px 0;}
+  .how h2{font-size:28px;text-align:center;margin-bottom:8px;}
+  .how p.lead{text-align:center;color:var(--bark-soft);font-size:15px;margin-bottom:40px;}
+  .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .step{position:relative;padding-left:2px;}
+  .step-num{
+    font-family:'Fraunces',serif;font-weight:600;font-size:15px;
+    color:var(--terracotta);border:1.5px solid var(--terracotta);
+    width:32px;height:32px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  }
+  .step h3{font-size:17px;margin-bottom:6px;}
+  .step p{font-size:13.5px;color:var(--bark-soft);}
+  @media(max-width:760px){.how-steps{grid-template-columns:1fr;gap:24px;}}
+
+  /* ---------- trust strip ---------- */
+  .trust{background:var(--bark);padding:44px 0;}
+  .trust .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+  .t-item{flex:1;min-width:180px;color:var(--cream);}
+  .t-item h4{font-family:'Fraunces',serif;font-weight:600;font-size:15.5px;margin-bottom:5px;color:#fff;}
+  .t-item p{font-size:12.5px;color:rgba(251,243,233,0.65);}
+
+  /* ---------- seller cta band ---------- */
+  .seller-band{
+    background:var(--terracotta);
+    padding:60px 32px;text-align:center;
+  }
+  .seller-band h2{color:#fff;font-size:30px;max-width:520px;margin:0 auto 12px;}
+  .seller-band p{color:rgba(255,255,255,0.85);font-size:15px;max-width:440px;margin:0 auto 28px;}
+  .seller-band .btn-primary{background:#fff;color:var(--bark);}
+  .seller-band .btn-primary:hover{background:var(--cream);}
+
+  /* ---------- footer ---------- */
+  footer{padding:40px 32px 32px;}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:22px;}
+  .foot-links a{font-size:13px;color:var(--bark-soft);}
+  .foot-links a:hover{color:var(--terracotta-dark);}
+  .foot-copy{font-size:12.5px;color:var(--bark-soft);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#" class="logo">CraftGali</a>
+    <nav class="nav-links nav-mobile-hide">
+      <a href="#explore">Explore</a>
+      <a href="#discover">Categories</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <a href="#sell" class="nav-cta">Start selling</a>
+  </div>
+</header>
+
+<section class="hero">
+  <span class="eyebrow"><span class="dot"></span> Now live in your neighborhood</span>
+  <h1>Art and decor made by <em>someone on your street</em></h1>
+  <p class="sub">Discover handmade paintings, decor and pre-loved finds from local creators. No shipping, no markup — just your gali.</p>
+  <div class="hero-ctas">
+    <a href="#explore" class="btn btn-primary">Explore near you</a>
+    <a href="#sell" class="btn btn-secondary">List your craft</a>
+  </div>
+  <p class="hero-note">Free to browse · Pickup within your neighborhood · Payments held safely until delivery</p>
+</section>
+
+<section class="explore" id="explore">
+  <div class="wrap">
+    <div class="explore-head">
+      <h2 id="explore-heading">Explore your gali</h2>
+      <button class="location-pill" id="loc-trigger" onclick="toggleLocPop()">
+        📍 <span id="loc-label">Bandra West, Mumbai</span> — change
+        <div class="loc-pop" id="loc-pop">
+          <p class="loc-pop-label">Browse by</p>
+          <div class="scope-row">
+            <span class="scope-chip active" data-scope="nearby">Nearby</span>
+            <span class="scope-chip" data-scope="city">City</span>
+            <span class="scope-chip" data-scope="state">State</span>
+            <span class="scope-chip" data-scope="country">Country</span>
+          </div>
+          <div class="radius-row" id="radius-row">
+            <span class="radius-chip" data-r="5">5 km</span>
+            <span class="radius-chip active" data-r="10">10 km</span>
+            <span class="radius-chip" data-r="25">25 km</span>
+          </div>
+          <p class="loc-note" id="loc-note"><strong>Pickup still works locally.</strong> Wider scopes are for browsing — you'll need to arrange a nearby meet-up to actually buy.</p>
+          <button class="loc-apply" onclick="applyLocation()">Apply</button>
+        </div>
+      </button>
+    </div>
+
+    <div class="explore-scroll">
+      <div class="p-card">
+        <div class="p-thumb" style="background:linear-gradient(155deg,#9CD5FF,#355872);">
+          <span class="p-badge">2.1 km away</span>
+        </div>
+        <div class="p-body">
+          <p class="p-title">Hand-thrown clay vase</p>
+          <p class="p-meta">Meera Sculpts</p>
+          <div class="p-foot"><span class="p-price">₹3,200</span><span class="p-dist">Fixed price</span></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb" style="background:linear-gradient(155deg,#7AAACE,#2A4459);">
+          <span class="p-badge">Auction · 1d left</span>
+        </div>
+        <div class="p-body">
+          <p class="p-title">Wall mural, monsoon series</p>
+          <p class="p-meta">Rohan Paints</p>
+          <div class="p-foot"><span class="p-price">₹5,600</span><span class="p-dist">Highest bid</span></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb" style="background:linear-gradient(155deg,#9CD5FF,#2A4459);">
+          <span class="p-badge">3.4 km away</span>
+        </div>
+        <div class="p-body">
+          <p class="p-title">Vintage brass table lamp</p>
+          <p class="p-meta">Pre-loved · Gently used</p>
+          <div class="p-foot"><span class="p-price">₹1,450</span><span class="p-dist">Fixed price</span></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb" style="background:linear-gradient(155deg,#355872,#9CD5FF);">
+          <span class="p-badge">0.8 km away</span>
+        </div>
+        <div class="p-body">
+          <p class="p-title">Macrame wall hanging</p>
+          <p class="p-meta">Studio Sena</p>
+          <div class="p-foot"><span class="p-price">₹890</span><span class="p-dist">Fixed price</span></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb" style="background:linear-gradient(155deg,#2A4459,#7AAACE);">
+          <span class="p-badge">Auction · 4h left</span>
+        </div>
+        <div class="p-body">
+          <p class="p-title">Terracotta wall plates, set of 3</p>
+          <p class="p-meta">Kumbh Studio</p>
+          <div class="p-foot"><span class="p-price">₹2,100</span><span class="p-dist">Highest bid</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fallback state: swap the scroll row above for this block when a location has
+         fewer than ~6 active listings nearby, so new markets never show an empty shelf. -->
+    <div class="explore-fallback">
+      Not many listings near you yet — here's what's trending across India while your neighborhood fills up.
+    </div>
+  </div>
+</section>
+
+<section class="discover" id="discover">
+  <div class="wrap">
+    <p class="kicker">Browse by intent</p>
+    <h2>Four ways into the neighborhood</h2>
+    <div class="discover-grid">
+      <div class="d-card">
+        <div class="d-icon" style="background:var(--terracotta);color:#fff;">A</div>
+        <h3>Art &amp; paintings</h3>
+        <p>Original canvases, sketches and fine art from independent artists nearby.</p>
+      </div>
+      <div class="d-card">
+        <div class="d-icon" style="background:var(--clay);">H</div>
+        <h3>Handmade decor</h3>
+        <p>Macrame, pottery, resin work and crafted pieces for the home.</p>
+      </div>
+      <div class="d-card">
+        <div class="d-icon" style="background:var(--sage);">P</div>
+        <h3>Pre-loved items</h3>
+        <p>Quality used furniture and vintage decor, cycled to a new home.</p>
+      </div>
+      <div class="d-card">
+        <div class="d-icon" style="background:var(--ochre);color:#fff;">L</div>
+        <h3>Local auctions</h3>
+        <p>Bid on standout pieces before they're gone — all within your area.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <h2>From your workbench to their wall</h2>
+    <p class="lead">No shipping to arrange, no gallery cut to negotiate.</p>
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>List in minutes</h3>
+        <p>Photograph your piece, set a fixed price or start an auction. One registration, unlimited listings.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Sell or get bid on</h3>
+        <p>Buyers nearby browse, chat and either buy instantly or bid until your auction closes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Meet and get paid</h3>
+        <p>Hand it over at a safe public spot. Payment releases to your wallet after confirmed delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="t-item">
+      <h4>Escrow protected</h4>
+      <p>Payments are held securely and only released after the buyer confirms delivery.</p>
+    </div>
+    <div class="t-item">
+      <h4>Safe exchange zones</h4>
+      <p>Meet at a suggested public spot — your address is never shown to buyers.</p>
+    </div>
+    <div class="t-item">
+      <h4>No shipping needed</h4>
+      <p>Everything sells and moves within your neighborhood, no courier required.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seller-band" id="sell">
+  <h2>Your craft deserves an audience closer than a screen</h2>
+  <p>One-time registration, unlimited listings, and a public portfolio you can share anywhere.</p>
+  <a href="#" class="btn btn-primary">Register your storefront</a>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="logo" style="font-size:17px;">CraftGali</span>
+    <div class="foot-links">
+      <a href="#">About</a>
+      <a href="#">Safety</a>
+      <a href="#">For sellers</a>
+      <a href="#">Contact</a>
+    </div>
+    <span class="foot-copy">© 2026 CraftGali</span>
+  </div>
+</footer>
+
+<script>
+  let currentScope = 'nearby';
+  let currentRadius = 10;
+
+  function toggleLocPop(e){
+    if(e) e.stopPropagation();
+    document.getElementById('loc-pop').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e){
+    const pop = document.getElementById('loc-pop');
+    const trigger = document.getElementById('loc-trigger');
+    if(pop.classList.contains('open') && !trigger.contains(e.target)){
+      pop.classList.remove('open');
+    }
+  });
+  // prevent clicks inside the popover from bubbling to the trigger/document handlers above
+  document.getElementById('loc-pop').addEventListener('click', function(e){ e.stopPropagation(); });
+
+  document.querySelectorAll('.scope-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      document.querySelectorAll('.scope-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentScope = chip.dataset.scope;
+      document.getElementById('radius-row').style.display = currentScope === 'nearby' ? 'flex' : 'none';
+      const note = document.getElementById('loc-note');
+      if(currentScope === 'nearby'){
+        note.innerHTML = '<strong>Pickup ready.</strong> Everything shown here is close enough to meet up directly.';
+      } else {
+        note.innerHTML = '<strong>Pickup still works locally.</strong> Wider scopes are for browsing — you\'ll need to arrange a nearby meet-up to actually buy.';
+      }
+    });
+  });
+
+  document.querySelectorAll('.radius-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      document.querySelectorAll('.radius-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentRadius = chip.dataset.r;
+    });
+  });
+
+  function applyLocation(){
+    const labels = {
+      nearby: 'Bandra West, ' + currentRadius + ' km',
+      city: 'Mumbai',
+      state: 'Maharashtra',
+      country: 'India'
+    };
+    const headings = {
+      nearby: 'Explore your gali',
+      city: 'Trending in Mumbai',
+      state: 'Trending across Maharashtra',
+      country: 'Trending across India'
+    };
+    document.getElementById('loc-label').textContent = labels[currentScope];
+    document.getElementById('explore-heading').textContent = headings[currentScope];
+    document.getElementById('loc-pop').classList.remove('open');
+  }
+</script>
+</body>
+</html>

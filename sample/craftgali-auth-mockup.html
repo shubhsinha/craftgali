@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CraftGali — Auth &amp; Seller Onboarding Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terracotta:#659287;
+    --terracotta-dark:#4E7367;
+    --clay:#88BDA4;
+    --ochre:#B1D3B9;
+    --cream:#E6F2DD;
+    --cream2:#F0F7EC;
+    --linen:#DCEEDD;
+    --bark:#3D5F53;
+    --bark-soft:#6E8B80;
+    --sage-bg:#EAF4E6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Work Sans',sans-serif;
+    color:var(--bark);
+    min-height:100vh;
+    padding:48px 16px 80px;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
+    background:
+      radial-gradient(560px 420px at 12% 8%, rgba(101,146,135,0.16), transparent 65%),
+      radial-gradient(620px 480px at 88% 92%, rgba(136,189,164,0.20), transparent 60%),
+      linear-gradient(180deg, #F6FAF4, #EAF3E4 60%, #E4F0DE);
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;color:#1E2E28;}
+
+  .page-title{max-width:440px;margin:0 auto 6px;font-size:23px;text-align:center;position:relative;z-index:2;}
+  .page-sub{max-width:400px;margin:0 auto 36px;font-size:13.5px;color:var(--bark-soft);text-align:center;position:relative;z-index:2;line-height:1.55;}
+
+  /* ---------- signature: the gali (lane) stepper — a winding dotted path
+     connecting each step, echoing the same "walk down the lane" motif used
+     on the landing page, rather than a generic tab bar. ---------- */
+  .stepper-wrap{max-width:460px;margin:0 auto 30px;position:relative;z-index:2;}
+  .stepper{display:flex;align-items:center;justify-content:space-between;position:relative;padding:0 4px;}
+  .stepper::before{
+    content:'';position:absolute;top:15px;left:20px;right:20px;height:0;
+    border-top:2px dashed rgba(61,95,83,0.22);z-index:0;
+  }
+  .step-dot{
+    position:relative;z-index:1;width:32px;height:32px;border-radius:50%;
+    background:#fff;border:2px solid rgba(61,95,83,0.18);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12.5px;font-weight:600;color:var(--bark-soft);cursor:pointer;
+    transition:all .15s ease;
+  }
+  .step-dot:hover{border-color:var(--terracotta);}
+  .step-dot.done{background:var(--terracotta); border-color:var(--terracotta); color:#fff;}
+  .step-dot.active{background:#fff;border-color:var(--terracotta);color:var(--terracotta-dark);box-shadow:0 0 0 4px rgba(101,146,135,0.16);}
+  .stepper-label{text-align:center;font-size:12px;font-weight:600;color:var(--terracotta-dark);margin-top:10px;letter-spacing:0.01em;}
+
+  /* ---------- phone frame ---------- */
+  .frame-outer{max-width:380px;margin:0 auto;position:relative;z-index:2;}
+  .frame{
+    background:#fff;border-radius:28px;
+    border:1px solid rgba(61,95,83,0.10);
+    box-shadow:0 2px 6px rgba(61,95,83,0.06), 0 24px 48px -12px rgba(61,95,83,0.22);
+    overflow:hidden;
+  }
+  .status-bar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 22px 4px;font-size:11px;font-weight:600;color:#1E2E28;
+  }
+  .status-dots{display:flex;gap:3px;align-items:center;}
+  .status-dots span{width:3px;height:8px;background:#1E2E28;border-radius:1px;display:inline-block;}
+  .status-dots span:nth-child(1){height:5px;align-self:flex-end;}
+  .status-dots span:nth-child(2){height:7px;align-self:flex-end;}
+
+  .frame-head{
+    padding:6px 22px 16px;border-bottom:1px solid rgba(61,95,83,0.08);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo-mini{font-family:'Fraunces',serif;font-weight:700;font-size:16.5px;color:var(--terracotta-dark);}
+  .step-tag{font-size:10.5px;color:var(--terracotta-dark);background:var(--sage-bg);padding:5px 11px;border-radius:20px;font-weight:600;letter-spacing:0.02em;}
+
+  .screen{display:none;padding:28px 24px 26px;}
+  .screen.active{display:block;animation:fadeUp .28s ease;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .field-label{font-size:12px;font-weight:600;color:#1E2E28;margin-bottom:7px;display:block;letter-spacing:0.01em;}
+  .field{
+    width:100%;padding:13px 15px;border:1.5px solid rgba(61,95,83,0.16);
+    border-radius:10px;font-family:'Work Sans',sans-serif;font-size:14px;color:var(--bark);
+    margin-bottom:18px;background:#FBFDFA;transition:border-color .15s ease;
+  }
+  .field:focus{outline:none;border-color:var(--terracotta);background:#fff;}
+  .field::placeholder{color:#a6b8b1;}
+
+  .otp-row{display:flex;gap:8px;margin-bottom:18px;}
+  .otp-box{
+    width:43px;height:50px;border:1.5px solid rgba(61,95,83,0.16);border-radius:10px;
+    display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;
+    background:#FBFDFA;
+  }
+  .otp-box.filled{border-color:var(--terracotta);color:var(--terracotta-dark);background:var(--sage-bg);}
+
+  .btn{
+    width:100%;padding:14px 0;border-radius:10px;border:none;
+    font-family:'Work Sans',sans-serif;font-weight:600;font-size:14.5px;cursor:pointer;
+    transition:all .15s ease;
+  }
+  .btn-primary{background:var(--terracotta);color:#fff;box-shadow:0 8px 18px -6px rgba(101,146,135,0.55);}
+  .btn-primary:hover{background:var(--terracotta-dark);transform:translateY(-1px);}
+
+  .helper{font-size:11.5px;color:var(--bark-soft);text-align:center;margin-top:14px;line-height:1.55;}
+
+  .icon-badge{
+    width:46px;height:46px;border-radius:13px;background:var(--sage-bg);
+    display:flex;align-items:center;justify-content:center;font-size:19px;
+    margin-bottom:16px;color:var(--terracotta-dark);
+  }
+  .screen-title{font-size:18px;margin-bottom:5px;}
+  .screen-sub{font-size:12.5px;color:var(--bark-soft);margin-bottom:22px;line-height:1.5;}
+
+  /* home / buyer screen */
+  .home-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+  .avatar{width:36px;height:36px;border-radius:50%;background:var(--linen);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--terracotta-dark);font-size:13px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--ochre);}
+  .welcome{font-family:'Fraunces',serif;font-weight:600;font-size:19px;margin-bottom:2px;}
+  .welcome-sub{font-size:12px;color:var(--bark-soft);}
+  .sell-banner{
+    background:linear-gradient(150deg,var(--terracotta),var(--terracotta-dark));
+    border-radius:16px;padding:20px;color:#fff;margin:18px 0;position:relative;overflow:hidden;
+  }
+  .sell-banner::after{
+    content:'';position:absolute;right:-18px;top:-18px;width:90px;height:90px;
+    border-radius:50%;background:rgba(255,255,255,0.10);
+  }
+  .sell-banner h3{color:#fff;font-size:16px;margin-bottom:5px;position:relative;}
+  .sell-banner p{font-size:12px;color:rgba(255,255,255,0.85);margin-bottom:14px;position:relative;}
+  .sell-banner button{background:#fff;color:var(--terracotta-dark);border:none;border-radius:8px;padding:9px 17px;font-size:12.5px;font-weight:600;cursor:pointer;position:relative;}
+  .quick-row{display:flex;gap:10px;}
+  .quick-card{flex:1;background:#FBFDFA;border:1px solid rgba(61,95,83,0.08);border-radius:13px;padding:14px 10px;text-align:center;font-size:11px;font-weight:500;color:var(--bark-soft);}
+
+  /* seller form */
+  .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+  .chip{
+    font-size:12px;font-weight:500;padding:9px 14px;border-radius:20px;
+    background:#FBFDFA;color:var(--bark-soft);cursor:pointer;border:1.5px solid rgba(61,95,83,0.12);
+    transition:all .15s ease;
+  }
+  .chip.sel{background:var(--linen);color:var(--terracotta-dark);border-color:var(--terracotta);font-weight:600;}
+  .note-box{
+    background:var(--sage-bg);border-radius:11px;padding:13px 15px;font-size:11.5px;
+    color:var(--bark-soft);margin-bottom:18px;line-height:1.55;
+  }
+  .note-box strong{color:var(--terracotta-dark);}
+
+  /* payment screen */
+  .fee-card{background:#FBFDFA;border:1px solid rgba(61,95,83,0.08);border-radius:13px;padding:17px;margin-bottom:18px;}
+  .fee-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:9px;color:var(--bark-soft);}
+  .fee-row.total{border-top:1px dashed rgba(61,95,83,0.2);padding-top:11px;margin-top:6px;font-weight:600;color:#1E2E28;font-size:14px;}
+  .fee-row span:last-child{font-weight:600;color:#1E2E28;}
+
+  /* confirmation */
+  .confirm-icon{
+    width:60px;height:60px;border-radius:50%;
+    background:linear-gradient(150deg,var(--terracotta),var(--terracotta-dark));
+    display:flex;align-items:center;justify-content:center;margin:4px auto 18px;
+    font-size:24px;color:#fff;box-shadow:0 10px 22px -6px rgba(101,146,135,0.5);
+  }
+  .confirm-title{text-align:center;font-size:19px;margin-bottom:6px;}
+  .confirm-sub{text-align:center;font-size:12.5px;color:var(--bark-soft);margin-bottom:22px;line-height:1.5;}
+  .portfolio-link{
+    background:#FBFDFA;border:1px dashed rgba(101,146,135,0.4);border-radius:10px;padding:12px 14px;font-size:12.5px;
+    color:var(--terracotta-dark);text-align:center;margin-bottom:20px;font-weight:600;
+  }
+
+  .home-indicator{display:flex;justify-content:center;padding:10px 0 14px;}
+  .home-indicator span{width:110px;height:4px;border-radius:4px;background:rgba(61,95,83,0.18);}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Auth &amp; artist onboarding</h1>
+<p class="page-sub">One login for everyone. "Becoming an artist" is a step any buyer can take later — not a separate signup.</p>
+
+<div class="stepper-wrap">
+  <div class="stepper" id="stepper">
+    <div class="step-dot active" data-screen="s1">1</div>
+    <div class="step-dot" data-screen="s1b">2</div>
+    <div class="step-dot" data-screen="s2">3</div>
+    <div class="step-dot" data-screen="s3">4</div>
+    <div class="step-dot" data-screen="s4">5</div>
+    <div class="step-dot" data-screen="s5">6</div>
+  </div>
+  <p class="stepper-label" id="stepper-label">Sign in</p>
+</div>
+
+<div class="frame-outer">
+  <div class="frame">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-dots"><span></span><span></span><span style="height:8px;"></span></div>
+    </div>
+    <div class="frame-head">
+      <span class="logo-mini">CraftGali</span>
+      <span class="step-tag" id="frame-tag">Sign in</span>
+    </div>
+
+    <!-- Screen 1: phone + OTP login, same for every user -->
+    <div class="screen active" id="s1">
+      <div class="icon-badge">📱</div>
+      <p class="screen-title">Verify your number</p>
+      <p class="screen-sub">We'll text a 4-digit code — no password to remember.</p>
+      <label class="field-label">Phone number</label>
+      <input class="field" type="text" value="+91 98765 43210" readonly>
+      <label class="field-label">Enter OTP</label>
+      <div class="otp-row">
+        <div class="otp-box filled">4</div>
+        <div class="otp-box filled">8</div>
+        <div class="otp-box filled">2</div>
+        <div class="otp-box filled">1</div>
+        <div class="otp-box">&nbsp;</div>
+        <div class="otp-box">&nbsp;</div>
+      </div>
+      <button class="btn btn-primary" onclick="goTo('s1b')">Verify &amp; continue</button>
+      <p class="helper">Same flow whether you're new or returning — sellers and buyers log in exactly the same way.</p>
+    </div>
+
+    <!-- Screen 1b: normal buyer signup -->
+    <div class="screen" id="s1b">
+      <div class="icon-badge">👤</div>
+      <p class="screen-title">Tell us about you</p>
+      <p class="screen-sub">This is the entire signup — new numbers land here once.</p>
+      <label class="field-label">Your name</label>
+      <input class="field" type="text" placeholder="e.g. Ananya Rao">
+      <label class="field-label">City / pincode</label>
+      <input class="field" type="text" placeholder="e.g. Bandra West, 400050">
+      <button class="btn btn-primary" onclick="goTo('s2')">Create account</button>
+      <p class="helper">No seller fields, no category, no fee. Everyone becomes a full buyer with just this.</p>
+    </div>
+
+    <!-- Screen 2: buyer home -->
+    <div class="screen" id="s2">
+      <div class="home-head">
+        <div>
+          <p class="welcome">Hi, Ananya 👋</p>
+          <p class="welcome-sub">📍 Bandra West, Mumbai</p>
+        </div>
+        <div class="avatar">A</div>
+      </div>
+
+      <div class="sell-banner">
+        <h3>Have something to sell?</h3>
+        <p>Turn your craft into income — takes 3 minutes to set up.</p>
+        <button onclick="goTo('s3')">Start selling</button>
+      </div>
+
+      <div class="quick-row">
+        <div class="quick-card">Discover<br>nearby</div>
+        <div class="quick-card">Your<br>orders</div>
+        <div class="quick-card">Messages</div>
+      </div>
+      <p class="helper">There's no separate "seller app." Anyone can tap "Start selling" whenever they're ready — even months later.</p>
+    </div>
+
+    <!-- Screen 3: seller/storefront setup -->
+    <div class="screen" id="s3">
+      <div class="icon-badge">🎨</div>
+      <p class="screen-title">Set up your storefront</p>
+      <p class="screen-sub">Takes about 3 minutes.</p>
+      <label class="field-label">Storefront name</label>
+      <input class="field" type="text" placeholder="e.g. Meera Sculpts">
+
+      <label class="field-label">What do you make?</label>
+      <div class="chip-row">
+        <span class="chip sel">Art &amp; Paintings</span>
+        <span class="chip">Handmade Decor</span>
+        <span class="chip">Pre-Loved Items</span>
+      </div>
+
+      <label class="field-label">Pickup neighborhood</label>
+      <input class="field" type="text" placeholder="e.g. Bandra West (not your exact address)">
+
+      <div class="note-box"><strong>Private by default.</strong> Buyers only ever see your neighborhood or a suggested safe exchange spot — never your exact address.</div>
+
+      <button class="btn btn-primary" onclick="goTo('s4')">Continue to registration fee</button>
+    </div>
+
+    <!-- Screen 4: registration fee -->
+    <div class="screen" id="s4">
+      <div class="icon-badge">🧾</div>
+      <p class="screen-title">One-time registration</p>
+      <p class="screen-sub">Pay once, list forever.</p>
+      <div class="fee-card">
+        <div class="fee-row"><span>Seller registration</span><span>₹149</span></div>
+        <div class="fee-row"><span>Unlimited listings, lifetime</span><span>Included</span></div>
+        <div class="fee-row total"><span>Total</span><span>₹149</span></div>
+      </div>
+      <label class="field-label">Pay via UPI</label>
+      <input class="field" type="text" placeholder="yourname@upi">
+      <button class="btn btn-primary" onclick="goTo('s5')">Pay &amp; activate storefront</button>
+      <p class="helper">Same escrow-linked payment gateway buyers already use at checkout — no separate billing system.</p>
+    </div>
+
+    <!-- Screen 5: confirmation -->
+    <div class="screen" id="s5">
+      <div class="confirm-icon">✓</div>
+      <p class="confirm-title">Your storefront is live</p>
+      <p class="confirm-sub">Meera Sculpts can now list unlimited items, fixed price or auction.</p>
+      <div class="portfolio-link">craftgali.com/meera-sculpts</div>
+      <button class="btn btn-primary" onclick="goTo('s2')">Go to your storefront</button>
+      <p class="helper">Same account, same login. Nothing about your buyer experience changed.</p>
+    </div>
+
+    <div class="home-indicator"><span></span></div>
+  </div>
+</div>
+
+<script>
+  const tags = {s1:'Sign in', s1b:'Create account', s2:'Buyer home', s3:'Storefront setup', s4:'Registration fee', s5:'Storefront live'};
+  const order = ['s1','s1b','s2','s3','s4','s5'];
+
+  function goTo(id){
+    document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('frame-tag').textContent = tags[id];
+    document.getElementById('stepper-label').textContent = tags[id];
+
+    const idx = order.indexOf(id);
+    document.querySelectorAll('.step-dot').forEach((dot, i) => {
+      dot.classList.remove('active','done');
+      if(i < idx) dot.classList.add('done');
+      else if(i === idx) dot.classList.add('active');
+    });
+  }
+  document.querySelectorAll('.step-dot').forEach(dot => {
+    dot.addEventListener('click', () => goTo(dot.dataset.screen));
+  });
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('sel'));
+  });
+</script>
+
+</body>
+</html>
