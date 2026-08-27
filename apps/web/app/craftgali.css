@@ -21,6 +21,7 @@
   -webkit-font-smoothing: antialiased;
   position: relative;
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
@@ -196,7 +197,17 @@
 .craftgali .container { max-width: 1320px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
 
 /* ---------- HEADER ---------- */
-.craftgali header { position: sticky; top: 20px; z-index: 1000; margin: 0 20px; }
+.craftgali header { 
+  position: sticky; 
+  top: 0; 
+  z-index: 1000; 
+  width: 100%;
+  padding: 20px 0 0; /* Remove horizontal padding from outer header */
+  background: transparent !important; /* Force transparent to override globals.css */
+  backdrop-filter: none !important;
+  border: none !important;
+}
+
 .craftgali .header-glass {
   background: var(--glass-surface);
   backdrop-filter: blur(24px);
@@ -208,6 +219,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: calc(100% - 40px); /* Keep some margin on sides */
+  margin: 0 auto;
 }
 
 .craftgali .brand {
@@ -217,19 +230,35 @@
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
+  text-decoration: none;
+}
+
+.craftgali .brand-text {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  letter-spacing: -0.03em;
+}
+
+.craftgali .brand-text em {
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  transition: color 0.4s ease;
 }
 
 .craftgali .logo-img {
-  height: 36px;
+  height: 50px;
   width: auto;
   object-fit: contain;
+  display: block;
 }
 
 .craftgali .footer-logo {
-  height: 28px;
+  height: 32px;
 }
-.craftgali .brand em { font-style: italic; color: var(--primary-accent); transition: color 0.4s ease; }
 
 .craftgali .nav-actions { display: flex; gap: 8px; align-items: center; }
 

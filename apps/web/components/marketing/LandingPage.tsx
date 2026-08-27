@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type Category = "paintings" | "handicrafts";
@@ -662,12 +663,16 @@ export default function LandingPage() {
       <header>
         <div className="header-glass">
           <Link href="/" className="brand">
-            <img
+            <Image
               src="/craftgali-logo.png"
               alt=""
+              width={160}
+              height={50}
               className="logo-img"
+              priority
+              style={{ objectFit: 'contain', objectPosition: 'left' }}
             />
-            Craft<em>Gali</em>
+            <span className="brand-text">Craft<em>Gali</em></span>
           </Link>
           <div className="nav-actions">
             <div className="color-picker-dropdown" title="Select Color Vibe">
@@ -944,12 +949,15 @@ export default function LandingPage() {
         </svg>
         <div className="container footer-flex">
           <Link href="/" className="brand" style={{ fontSize: 20 }}>
-            <img
+            <Image
               src="/craftgali-logo.png"
               alt=""
+              width={120}
+              height={32}
               className="logo-img footer-logo"
+              style={{ objectFit: 'contain', objectPosition: 'left' }}
             />
-            Craft<em>Gali</em>
+            <span className="brand-text">Craft<em>Gali</em></span>
           </Link>
           <div>
             © 2026 Craft<em>Gali</em> — Supporting Artisans Reaching Every
