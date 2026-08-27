@@ -664,7 +664,7 @@ export default function LandingPage() {
           <Link href="/" className="brand">
             <img
               src="/craftgali-logo.png"
-              alt="CraftGali Logo"
+              alt=""
               className="logo-img"
             />
             Craft<em>Gali</em>
@@ -946,7 +946,7 @@ export default function LandingPage() {
           <Link href="/" className="brand" style={{ fontSize: 20 }}>
             <img
               src="/craftgali-logo.png"
-              alt="CraftGali Logo"
+              alt=""
               className="logo-img footer-logo"
             />
             Craft<em>Gali</em>
