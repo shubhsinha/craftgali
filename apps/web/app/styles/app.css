@@ -1,0 +1,269 @@
+/* ==========================================================================
+   Craftgali — the written pages
+   Fees, Guidelines, Trust & Safety, the Grievance Officer, the studio index,
+   and the short "nothing here yet" screens. One column, glass panels, no art.
+   ========================================================================== */
+
+.cg-doc,
+.cg-plain,
+.cg-studios,
+.cg-seller {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 46px var(--cg-gutter) 40px;
+}
+
+.cg-studios, .cg-seller { max-width: var(--cg-wrap); }
+
+.cg-doc__head { margin-bottom: 34px; }
+.cg-doc__title,
+.cg-plain__title {
+  margin: 12px 0 12px;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.cg-doc__lede, .cg-plain__lede { max-width: 62ch; }
+.cg-plain__lede { margin-bottom: 26px; font-size: 15px; line-height: 1.7; color: var(--cg-ink-mut); }
+
+/* --- numbered rules ------------------------------------------------------- */
+
+.cg-doc__rules { display: flex; flex-direction: column; gap: 16px; }
+
+.cg-doc__rule {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  padding: 24px 26px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-doc__figure {
+  flex: none;
+  min-width: 68px;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  background: var(--cg-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cg-doc__ruletitle { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.cg-doc__body { font-size: 13.5px; line-height: 1.7; color: var(--cg-ink-mut); }
+
+/* --- prose sections ------------------------------------------------------- */
+
+.cg-doc__sections { display: flex; flex-direction: column; gap: 30px; margin-top: 34px; }
+
+.cg-doc__heading {
+  margin-bottom: 10px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.cg-doc__list { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; }
+
+.cg-doc__list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--cg-ink-mut);
+}
+
+.cg-doc__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cg-gradient);
+}
+
+.cg-doc__rule--plain, .cg-doc__section { scroll-margin-top: 110px; }
+
+.cg-doc__notice { margin-top: 30px; }
+
+.cg-doc__officer {
+  margin-top: 26px;
+  padding: 24px 26px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+}
+
+.cg-doc__address { font-size: 13.5px; line-height: 1.8; color: var(--cg-ink-mut); font-style: normal; }
+
+/* --- the account table ---------------------------------------------------- */
+
+.cg-account {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  border-radius: var(--cg-r-card);
+  border: 1px solid var(--cg-edge);
+  background: var(--cg-edge-soft);
+}
+
+.cg-account > div {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  padding: 16px 22px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur-light);
+  -webkit-backdrop-filter: var(--cg-blur-light);
+}
+
+.cg-account dt { font-size: 12px; font-weight: 700; color: var(--cg-ink-mut); }
+.cg-account dd { font-size: 14px; }
+.cg-account a { color: var(--cg-hue); font-weight: 600; }
+
+/* --- settings blocks ------------------------------------------------------- */
+
+.cg-settings__block {
+  margin-top: 28px;
+  padding: 26px 28px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-settings__blocktitle { font-size: 18px; font-weight: 700; }
+
+.cg-settings__blocknote {
+  max-width: 62ch;
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--cg-ink-mut);
+}
+
+.cg-settings__form { max-width: 380px; margin-top: 18px; }
+
+.cg-settings__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+/* --- the studio index ------------------------------------------------------ */
+
+.cg-studios__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.cg-studiorow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.cg-studiorow:hover { transform: translateY(-4px); border-color: var(--cg-hue); }
+
+.cg-studiorow__face {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cg-solid) center / cover no-repeat;
+  border: 2px solid var(--cg-edge);
+}
+
+/* Every part of a row is a <span> inside an <a>, so each one that needs its own
+   line has to be told to take one. */
+.cg-studiorow__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cg-studiorow__name { display: flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 700; }
+.cg-studiorow__meta { display: block; font-size: 12px; color: var(--cg-ink-mut); }
+
+.cg-studiorow__counts {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: var(--cg-ink-mut);
+}
+
+.cg-studiorow__tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  color: var(--cg-on-hue);
+  background: var(--cg-gradient);
+}
+
+.cg-studiorow__skin {
+  white-space: nowrap;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cg-hue);
+}
+
+/* --- become a seller -------------------------------------------------------- */
+
+.cg-seller__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 36px;
+  align-items: start;
+  margin-top: 30px;
+}
+
+.cg-seller__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+@media (max-width: 900px) {
+  .cg-doc__title, .cg-plain__title { font-size: 27px; }
+  .cg-doc__rule { flex-direction: column; gap: 10px; }
+  .cg-account > div { grid-template-columns: 1fr; gap: 4px; }
+  .cg-seller__grid { grid-template-columns: 1fr; }
+}

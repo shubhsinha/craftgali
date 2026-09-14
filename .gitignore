@@ -36,3 +36,6 @@ build/
 *.tfstate
 *.tfstate.*
 .terraform/
+
+# TypeScript incremental build cache
+*.tsbuildinfo

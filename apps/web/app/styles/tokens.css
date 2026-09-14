@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Craftgali — the glass system
+   Four hues, two modes. The surfaces are glass over a blurred colour field;
+   the hue only ever touches accents, gradients and the heritage tinting, so a
+   mode swap moves the ground and a hue swap moves the light.
+   ========================================================================== */
+
+:root {
+  /* --- the ground and the glass ------------------------------------------ */
+  --cg-base:          #f4f5fb;
+  --cg-surface:       rgba(255, 255, 255, 0.65);   /* chrome: bars, rails */
+  --cg-card:          rgba(255, 255, 255, 0.75);   /* content: cards, panels */
+  --cg-edge:          rgba(255, 255, 255, 0.9);    /* the lit rim on glass */
+  --cg-edge-soft:     rgba(255, 255, 255, 0.4);    /* rules inside glass */
+  --cg-solid:         #ffffff;                     /* the one opaque surface */
+
+  /* --- ink ---------------------------------------------------------------- */
+  --cg-ink:           #0b0f19;
+  --cg-ink-mut:       #64748b;
+  --cg-on-hue:        #ffffff;   /* legible on the hue gradient */
+
+  /* --- depth -------------------------------------------------------------- */
+  --cg-shadow:        0 20px 40px -15px rgba(31, 38, 135, 0.14);
+  --cg-shadow-lift:   0 28px 60px -18px rgba(31, 38, 135, 0.22);
+  --cg-blur:          blur(24px);
+  --cg-blur-light:    blur(16px);
+
+  /* --- the heritage layer's own tints ------------------------------------- */
+  --cg-gold:          #b8860b;
+  --cg-motif:         color-mix(in srgb, var(--cg-hue) 62%, var(--cg-gold) 38%);
+  --cg-motif-opacity: 0.16;
+  --cg-medallion-opacity: 0.22;
+  --cg-glow-opacity:  0.35;
+
+  /* --- type --------------------------------------------------------------- */
+  --cg-display: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --cg-sans:    var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* --- rhythm ------------------------------------------------------------- */
+  --cg-wrap:    1320px;
+  --cg-gutter:  40px;
+  --cg-r-pill:  40px;   /* buttons, chips, the search bar */
+  --cg-r-bar:   28px;   /* the floating chrome */
+  --cg-r-card:  30px;   /* artwork cards */
+  --cg-r-panel: 20px;   /* panels inside a card */
+}
+
+/* --- the hues, light mode ------------------------------------------------- */
+
+:root,
+[data-hue="indigo"] {
+  --cg-hue:      #6366f1;
+  --cg-hue-2:    #9333ea;
+  --cg-gradient: linear-gradient(135deg, #6366f1 0%, #9333ea 100%);
+  --cg-glow-1:   #ddd6fe;
+  --cg-glow-2:   #c7d2fe;
+  --cg-glow-3:   #fce7f3;
+}
+
+[data-hue="ruby"] {
+  --cg-hue:      #dc2626;
+  --cg-hue-2:    #991b1b;
+  --cg-gradient: linear-gradient(135deg, #991b1b 0%, #ef4444 100%);
+  --cg-glow-1:   #fee2e2;
+  --cg-glow-2:   #fecaca;
+  --cg-glow-3:   #fff5f5;
+}
+
+[data-hue="pink"] {
+  --cg-hue:      #db2777;
+  --cg-hue-2:    #be185d;
+  --cg-gradient: linear-gradient(135deg, #be185d 0%, #ec4899 100%);
+  --cg-glow-1:   #fce7f3;
+  --cg-glow-2:   #fbcfe8;
+  --cg-glow-3:   #fdf2f8;
+}
+
+[data-hue="teal"] {
+  --cg-hue:      #0d9488;
+  --cg-hue-2:    #0f766e;
+  --cg-gradient: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+  --cg-glow-1:   #ccfbf1;
+  --cg-glow-2:   #99f6e4;
+  --cg-glow-3:   #f0fdfa;
+}
+
+/*
+ * Light mode, declared explicitly rather than left to :root.
+ *
+ * A skinned subtree can sit inside a differently-moded one — a light storefront
+ * viewed by a buyer browsing in dark, or the editor's light preview inside the
+ * dark studio. If light were only ever "the absence of the dark block", such a
+ * subtree would declare nothing and inherit its ancestor's dark values. So each
+ * token the dark block overrides is restated here, and the two are mirrors.
+ */
+[data-mode="light"] {
+  --cg-base:       #f4f5fb;
+  --cg-surface:    rgba(255, 255, 255, 0.65);
+  --cg-card:       rgba(255, 255, 255, 0.75);
+  --cg-edge:       rgba(255, 255, 255, 0.9);
+  --cg-edge-soft:  rgba(255, 255, 255, 0.4);
+  --cg-solid:      #ffffff;
+
+  --cg-ink:        #0b0f19;
+  --cg-ink-mut:    #64748b;
+
+  --cg-shadow:      0 20px 40px -15px rgba(31, 38, 135, 0.14);
+  --cg-shadow-lift: 0 28px 60px -18px rgba(31, 38, 135, 0.22);
+
+  --cg-gold:              #b8860b;
+  --cg-motif:             color-mix(in srgb, var(--cg-hue) 62%, var(--cg-gold) 38%);
+  --cg-motif-opacity:     0.16;
+  --cg-medallion-opacity: 0.22;
+  --cg-glow-opacity:      0.35;
+}
+
+/* --- dark mode: the ground drops, the glass darkens with it --------------- */
+
+[data-mode="dark"] {
+  --cg-base:       #090d16;
+  --cg-surface:    rgba(15, 23, 42, 0.65);
+  --cg-card:       rgba(30, 41, 59, 0.75);
+  --cg-edge:       rgba(255, 255, 255, 0.12);
+  --cg-edge-soft:  rgba(255, 255, 255, 0.06);
+  --cg-solid:      #0f172a;
+
+  --cg-ink:        #f8fafc;
+  --cg-ink-mut:    #94a3b8;
+
+  --cg-shadow:      0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  --cg-shadow-lift: 0 28px 60px -18px rgba(0, 0, 0, 0.65);
+
+  /* Gold reads muddy against a dark ground; the brighter leaf holds up. */
+  --cg-gold:              #e8c15a;
+  --cg-motif:             color-mix(in srgb, var(--cg-hue) 78%, var(--cg-gold) 22%);
+  --cg-motif-opacity:     0.13;
+  --cg-medallion-opacity: 0.19;
+  --cg-glow-opacity:      0.2;
+}
+
+[data-mode="dark"],
+[data-mode="dark"][data-hue="indigo"] {
+  --cg-hue:      #818cf8;
+  --cg-hue-2:    #c084fc;
+  --cg-gradient: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  --cg-glow-1:   #312e81;
+  --cg-glow-2:   #3730a3;
+  --cg-glow-3:   #581c87;
+}
+
+[data-mode="dark"][data-hue="ruby"] {
+  --cg-hue:      #f87171;
+  --cg-hue-2:    #dc2626;
+  --cg-gradient: linear-gradient(135deg, #dc2626 0%, #f87171 100%);
+  --cg-glow-1:   #7f1d1d;
+  --cg-glow-2:   #991b1b;
+  --cg-glow-3:   #450a0a;
+}
+
+[data-mode="dark"][data-hue="pink"] {
+  --cg-hue:      #f472b6;
+  --cg-hue-2:    #db2777;
+  --cg-gradient: linear-gradient(135deg, #db2777 0%, #f472b6 100%);
+  --cg-glow-1:   #831843;
+  --cg-glow-2:   #9d174d;
+  --cg-glow-3:   #500724;
+}
+
+[data-mode="dark"][data-hue="teal"] {
+  --cg-hue:      #2dd4bf;
+  --cg-hue-2:    #0f766e;
+  --cg-gradient: linear-gradient(135deg, #0f766e 0%, #2dd4bf 100%);
+  --cg-glow-1:   #134e4a;
+  --cg-glow-2:   #115e59;
+  --cg-glow-3:   #042f2e;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --cg-gutter: 18px;
+    --cg-r-bar: 20px;
+    --cg-r-card: 24px;
+  }
+}

@@ -1,3 +1,13 @@
 .git
+.github
+docs
+sample
 **/node_modules
 **/.next
+**/.env.local
+**/.env
+apps/mobile
+apps/backend/cmd
+apps/backend/internal
+apps/backend/pkg
+**/*.md

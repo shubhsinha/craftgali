@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E7E9F4;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+a{color:#6366F1;text-decoration:none}a:hover{color:#9333EA}
+@keyframes cg-glimmer{0%,100%{opacity:.6}50%{opacity:.95}}
+</style></helmet>
+
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <linearGradient id="cgJewel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366F1"></stop>
+      <stop offset="100%" stop-color="#B8860B"></stop>
+    </linearGradient>
+    <pattern id="cgTapestry" width="240" height="240" patternUnits="userSpaceOnUse" patternTransform="rotate(6)">
+      <g transform="translate(44,48)">
+        <circle r="24" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"></circle>
+        <circle r="17" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.6"></circle>
+        <g stroke="currentColor" stroke-width="1.1" fill="none">
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z"></path>
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z" transform="rotate(45)"></path>
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z" transform="rotate(90)"></path>
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z" transform="rotate(135)"></path>
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z" transform="rotate(180)"></path>
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z" transform="rotate(225)"></path>
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z" transform="rotate(270)"></path>
+          <path d="M0,0 C -4,-9 -1.5,-15 0,-17.5 C 1.5,-15 4,-9 0,0 Z" transform="rotate(315)"></path>
+        </g>
+        <circle r="3" fill="url(#cgJewel)"></circle>
+      </g>
+      <g transform="translate(172,42)" stroke="currentColor" fill="none" stroke-width="1" opacity="0.8">
+        <path d="M-24,0 A 12,12 0 0 1 0,0 A 12,12 0 0 1 24,0"></path>
+        <path d="M-18,0 A 6,6 0 0 1 -6,0 A 6,6 0 0 1 6,0 A 6,6 0 0 1 18,0" opacity="0.7"></path>
+      </g>
+      <g transform="translate(198,146)" stroke="currentColor" stroke-width="1" opacity="0.55">
+        <path d="M-16,-16 L16,-16 M-16,-8 L16,-8 M-16,0 L16,0 M-16,8 L16,8 M-16,16 L16,16"></path>
+        <path d="M-16,-16 L-16,16 M-8,-16 L-8,16 M0,-16 L0,16 M8,-16 L8,16 M16,-16 L16,16" opacity="0.45"></path>
+      </g>
+      <g transform="translate(36,196)" opacity="0.85">
+        <path d="M-10,-14 L10,-14 L7,-4 C 12,2 12,16 0,20 C -12,16 -12,2 -7,-4 Z" fill="none" stroke="currentColor" stroke-width="1.1"></path>
+        <line x1="-12" y1="-14" x2="12" y2="-14" stroke="currentColor" stroke-width="1.1"></line>
+      </g>
+      <g transform="translate(122,122)" fill="none" stroke="currentColor" stroke-width="1" opacity="0.8">
+        <path d="M0,-9 C 3,-9 3,-3 0,0 C -3,-3 -3,-9 0,-9 Z"></path>
+        <path d="M0,-9 C 3,-9 3,-3 0,0 C -3,-3 -3,-9 0,-9 Z" transform="rotate(72)"></path>
+        <path d="M0,-9 C 3,-9 3,-3 0,0 C -3,-3 -3,-9 0,-9 Z" transform="rotate(144)"></path>
+        <path d="M0,-9 C 3,-9 3,-3 0,0 C -3,-3 -3,-9 0,-9 Z" transform="rotate(216)"></path>
+        <path d="M0,-9 C 3,-9 3,-3 0,0 C -3,-3 -3,-9 0,-9 Z" transform="rotate(288)"></path>
+        <circle r="1.6" fill="currentColor" stroke="none"></circle>
+      </g>
+      <path d="M196 202 C 212 202, 212 222, 201 230 C 191 237, 178 233, 177 221 C 176 212, 184 209, 189 214" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.85"></path>
+      <g transform="translate(28,116)" fill="currentColor" opacity="0.8">
+        <circle cx="-6" cy="-6" r="1"></circle><circle cx="0" cy="-8" r="1"></circle><circle cx="6" cy="-6" r="1"></circle>
+        <circle cx="-8" cy="0" r="1"></circle><circle cx="0" cy="0" r="1.3"></circle><circle cx="8" cy="0" r="1"></circle>
+        <circle cx="-6" cy="6" r="1"></circle><circle cx="0" cy="8" r="1"></circle><circle cx="6" cy="6" r="1"></circle>
+      </g>
+      <g transform="translate(112,216)" stroke="currentColor" stroke-width="1" fill="none" opacity="0.7">
+        <path d="M-30,0 Q -25,-8 -20,0 Q -15,8 -10,0 Q -5,-8 0,0 Q 5,8 10,0 Q 15,-8 20,0 Q 25,8 30,0"></path>
+      </g>
+      <g transform="translate(224,96)" opacity="0.8">
+        <path d="M-9,0 C -5,-5 5,-5 9,0 C 5,5 -5,5 -9,0 Z" fill="none" stroke="currentColor" stroke-width="1"></path>
+        <path d="M9,0 L14,-3.5 M9,0 L14,3.5" fill="none" stroke="currentColor" stroke-width="0.9"></path>
+      </g>
+      <g stroke="currentColor" stroke-width="0.55" opacity="0.4" fill="none">
+        <path d="M0,120 L120,0 L240,120 L120,240 Z"></path>
+        <path d="M60,120 L120,60 L180,120 L120,180 Z"></path>
+      </g>
+    </pattern>
+  </defs>
+</svg>
+
+<section style="padding:44px 48px 40px;border-bottom:1px solid rgba(11,15,25,.09);scroll-margin-top:16px" id="t1">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 22px">
+    <a href="#t1" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#0B0F19;color:#fff;border-radius:5px">1</a>
+    <span style="font:600 13px/1.2 'Plus Jakarta Sans',sans-serif;color:#0B0F19">CraftGali — the PRD pages rebuilt in your glassmorphic system, untouched</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start">
+
+<div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1a">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.55)"><a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(11,15,25,.08);color:#0B0F19;border-radius:5px">1a</a>Your system, lifted verbatim from craftgali_web.html</div>
+<div style="width:800px;position:relative;overflow:hidden;background:#F4F5FB;border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.14)">
+  <div style="position:absolute;top:-120px;left:-120px;width:560px;height:560px;border-radius:50%;background:#DDD6FE;filter:blur(150px);opacity:.35"></div>
+  <div style="position:absolute;bottom:-160px;right:-140px;width:560px;height:560px;border-radius:50%;background:#FCE7F3;filter:blur(150px);opacity:.35"></div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%)" aria-hidden="true"><rect width="100%" height="100%" fill="url(#cgTapestry)"></rect></svg>
+
+  <div style="position:relative;padding:44px 46px 38px">
+    <div style="font:700 11.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#6366F1;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:8px 20px;border-radius:30px;display:inline-block">Design language · unchanged</div>
+    <h1 style="font:800 40px/1.12 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:20px 0 0;max-width:22ch">Same glass, four hues, two modes — <em style="font-style:normal;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">now across six screens</em></h1>
+    <p style="font:500 15.5px/1.65 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.82);margin:16px 0 0;max-width:62ch;text-wrap:pretty">Nothing in your visual system was replaced. The tokens, the 28-spoke medallion, the heritage tapestry, the toran and rangoli dividers, the jali corners and the chakra watermark all carry over exactly as written. What is new is the rest of the product: the discover feed, the listing page, the studio dashboard and the storefront editor, drawn with the same parts.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px">
+      <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:22px 24px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Theme hues</div>
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <span style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#9333EA);box-shadow:0 0 0 2px #F4F5FB,0 0 0 4px #0B0F19"></span>
+          <span style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#991B1B,#EF4444)"></span>
+          <span style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#BE185D,#EC4899)"></span>
+          <span style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0F766E,#14B8A6)"></span>
+        </div>
+        <div style="font:500 12.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:14px">Indigo · Ruby · Pink · Teal. Buyer-side accent, and the artist's storefront skin in <a href="#1f">1f</a>.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:22px 24px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Surfaces</div>
+        <div style="display:flex;gap:8px;margin-top:16px">
+          <span style="flex:1;height:34px;border-radius:12px;background:#F4F5FB;border:1px solid rgba(11,15,25,.1)"></span>
+          <span style="flex:1;height:34px;border-radius:12px;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9)"></span>
+          <span style="flex:1;height:34px;border-radius:12px;background:#090D16"></span>
+          <span style="flex:1;height:34px;border-radius:12px;background:rgba(30,41,59,.9);border:1px solid rgba(255,255,255,.12)"></span>
+        </div>
+        <div style="font:500 12.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:14px">blur(24px) glass over three ambient glows, radii 20–50px, one shadow tier.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:22px 24px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Type</div>
+        <div style="font:700 27px/1.1 'Playfair Display',serif;color:#0B0F19;margin-top:12px">Craft<em style="font-style:italic;color:#6366F1">Gali</em></div>
+        <div style="font:800 19px/1.2 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-top:8px">Headings 800</div>
+        <div style="font:500 13px/1.6 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Playfair Display for the wordmark and italic sublines; Plus Jakarta Sans everywhere else.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:22px 24px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Heritage layer</div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:14px;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%)">
+          <svg width="46" height="46" viewBox="0 0 70 70" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4,30 A26,26 0 0,1 30,4"></path><path d="M4,18 A38,38 0 0,1 18,4"></path><path d="M4,42 A50,50 0 0,1 42,4"></path></g><circle cx="4" cy="4" r="2.4" fill="url(#cgJewel)"></circle></svg>
+          <svg width="46" height="46" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="50" cy="50" r="6" fill="currentColor"></circle><g stroke="currentColor" stroke-width="1.4"><line x1="50" y1="6" x2="50" y2="94"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(30 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(60 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(90 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(120 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(150 50 50)"></line></g></svg>
+          <svg width="120" height="26" viewBox="0 0 180 18" aria-hidden="true"><line x1="0" y1="9" x2="60" y2="9" stroke="currentColor" stroke-width="1"></line><line x1="120" y1="9" x2="180" y2="9" stroke="currentColor" stroke-width="1"></line><path d="M90,1 L98,9 L90,17 L82,9 Z" fill="none" stroke="currentColor" stroke-width="1.1"></path><circle cx="70" cy="9" r="1.6" fill="currentColor"></circle><circle cx="110" cy="9" r="1.6" fill="currentColor"></circle></svg>
+        </div>
+        <div style="font:500 12.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:14px">Tapestry tile, jali corners, chakra watermark, rangoli and toran dividers — same SVGs, same tinting rule.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1b">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.55)"><a href="#1b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(11,15,25,.08);color:#0B0F19;border-radius:5px">1b</a>P1 Landing, logged out — desktop 1440 + mobile 390. Your hero, extended with the PRD's founding-seller tiers and trust numbers.</div>
+<div style="display:flex;gap:20px;align-items:flex-start">
+
+<div style="width:1440px;position:relative;overflow:hidden;background:#F4F5FB;border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.14)">
+  <div style="position:absolute;top:-100px;left:-100px;width:700px;height:700px;border-radius:50%;background:#DDD6FE;filter:blur(150px);opacity:.35"></div>
+  <div style="position:absolute;top:200px;right:-150px;width:750px;height:750px;border-radius:50%;background:#C7D2FE;filter:blur(150px);opacity:.35"></div>
+  <div style="position:absolute;bottom:50px;left:15%;width:600px;height:600px;border-radius:50%;background:#FCE7F3;filter:blur(150px);opacity:.35"></div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%)" aria-hidden="true"><rect width="100%" height="100%" fill="url(#cgTapestry)"></rect></svg>
+
+  <div style="position:relative;padding:20px 20px 0">
+    <div style="background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);padding:14px 32px;display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;align-items:center;gap:38px">
+        <div style="font:700 27px/1 'Playfair Display',serif;color:#0B0F19">Craft<em style="font-style:italic;color:#6366F1">Gali</em></div>
+        <div style="display:flex;gap:26px;font:600 13.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">
+          <span style="color:#6366F1">Discover</span><span>Paintings &amp; Canvas</span><span>Handcrafted Objects</span><span>Fees</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="display:flex;gap:6px;align-items:center;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:6px 10px;border-radius:30px">
+          <span style="width:16px;height:16px;border-radius:50%;background:#6366F1;border:2px solid #0B0F19"></span>
+          <span style="width:16px;height:16px;border-radius:50%;background:#DC2626;border:2px solid transparent"></span>
+          <span style="width:16px;height:16px;border-radius:50%;background:#EC4899;border:2px solid transparent"></span>
+          <span style="width:16px;height:16px;border-radius:50%;background:#14B8A6;border:2px solid transparent"></span>
+        </div>
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:16px">🌙</span>
+        <span style="font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:11px 18px;border-radius:40px">Sign In</span>
+        <span style="font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:12px 24px;border-radius:40px;box-shadow:0 6px 20px rgba(99,102,241,.32)">Open Atelier</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:45px 40px 24px;text-align:center">
+    <svg viewBox="0 0 640 640" width="640" height="640" style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);opacity:.22;color:color-mix(in srgb, #6366F1 65%, #B8860B 35%)" aria-hidden="true">
+      <g fill="none" stroke="currentColor">
+        <circle cx="320" cy="320" r="300" stroke-width="1"></circle>
+        <circle cx="320" cy="320" r="255" stroke-width="1" stroke-dasharray="2 10"></circle>
+        <circle cx="320" cy="320" r="210" stroke-width="1.2"></circle>
+        <circle cx="320" cy="320" r="70" stroke-width="1.4"></circle>
+        <g stroke-width="0.5" opacity="0.45">
+          <line x1="320" y1="110" x2="320" y2="250"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(25.7 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(51.4 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(77.1 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(102.9 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(128.6 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(154.3 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(180 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(205.7 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(231.4 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(257.1 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(282.9 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(308.6 320 320)"></line><line x1="320" y1="110" x2="320" y2="250" transform="rotate(334.3 320 320)"></line>
+        </g>
+        <g transform="translate(320,145)" stroke-width="1.1"><path d="M-8,4 Q-8,-8 0,-8 Q8,-8 8,4 Z"></path><line x1="-10" y1="4" x2="10" y2="4"></line><line x1="0" y1="-8" x2="0" y2="-11"></line><ellipse cx="0" cy="-11" rx="3" ry="0.9"></ellipse></g>
+        <g transform="translate(465,220)" stroke-width="1.1"><path d="M-9,9 L0,-9 L9,9 Z"></path><path d="M-3,9 L-3,5 L3,5 L3,9 Z"></path></g>
+        <g transform="translate(495,320)" stroke-width="1.1"><circle r="8"></circle><line x1="0" y1="-8" x2="0" y2="8"></line><line x1="-6.9" y1="-4" x2="6.9" y2="4"></line><line x1="6.9" y1="-4" x2="-6.9" y2="4"></line></g>
+        <g transform="translate(465,420)" stroke-width="1.1"><rect x="-8" y="2" width="16" height="7"></rect><path d="M-8,2 Q0,-4 8,2"></path></g>
+        <g transform="translate(320,495)" stroke-width="1.1"><path d="M-8,10 L-8,-2 Q-8,-10 0,-10 Q8,-10 8,-2 L8,10"></path><path d="M-4,10 L-4,-1 Q-4,-6 0,-6 Q4,-6 4,-1 L4,10"></path></g>
+        <g transform="translate(175,420)" stroke-width="1.1"><path d="M-9,-9 Q0,-13 9,-9 L9,7 L-9,7 Z"></path></g>
+        <g transform="translate(145,320)" stroke-width="1.1"><path d="M-8,4 Q-8,-8 0,-8 Q8,-8 8,4 Z"></path><line x1="-10" y1="4" x2="10" y2="4"></line></g>
+        <g transform="translate(175,220)" stroke-width="1.1"><path d="M-7,9 L-7,3 L7,3 L7,9 Z"></path><path d="M-9,3 L-7,0 L7,0 L9,3 Z"></path></g>
+      </g>
+    </svg>
+
+    <div style="position:relative;max-width:1320px;margin:0 auto">
+      <div style="font:600 italic 18px/1.3 'Playfair Display',serif;color:#6366F1;margin-bottom:10px">Passionate hands, Legendary art</div>
+      <h1 style="font:800 40px/1.15 'Plus Jakarta Sans',sans-serif;color:#0B0F19;max-width:780px;margin:0 auto 16px">Reaching Every Corner <em style="font-style:normal;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">of the World</em></h1>
+      <p style="font:500 15.5px/1.6 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.82);max-width:560px;margin:0 auto 26px">Explore breathtaking canvases, sculptures, and decor curated directly from independent makers in your creative ecosystem.</p>
+
+      <div style="display:flex;justify-content:center;margin:6px 0 26px;opacity:.85;color:color-mix(in srgb, #6366F1 60%, #B8860B 40%)">
+        <svg width="180" height="18" viewBox="0 0 180 18" aria-hidden="true"><line x1="0" y1="9" x2="60" y2="9" stroke="currentColor" stroke-width="1"></line><line x1="120" y1="9" x2="180" y2="9" stroke="currentColor" stroke-width="1"></line><path d="M90,1 L98,9 L90,17 L82,9 Z" fill="none" stroke="currentColor" stroke-width="1.1"></path><circle cx="70" cy="9" r="1.6" fill="currentColor"></circle><circle cx="110" cy="9" r="1.6" fill="currentColor"></circle></svg>
+      </div>
+
+      <div style="max-width:760px;margin:0 auto;background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:50px;padding:10px 14px 10px 24px;display:flex;align-items:center;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);gap:14px">
+        <div style="display:flex;align-items:center;gap:12px;flex:0 0 240px;border-right:1px solid rgba(255,255,255,.4);padding-right:14px">
+          <span style="font-size:15px">📍</span>
+          <span style="font:500 14px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Bandra West · 10 km</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex:1">
+          <span style="font-size:15px">🔍</span>
+          <span style="font:500 14px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Search artwork, studio, or medium…</span>
+        </div>
+        <span style="font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:14px 26px;border-radius:40px;box-shadow:0 6px 20px rgba(99,102,241,.32)">Explore near me</span>
+      </div>
+
+      <div style="font:700 11.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#6366F1;background:rgba(255,255,255,.75);padding:8px 20px;border-radius:30px;display:inline-block;margin-top:24px;border:1px solid rgba(255,255,255,.9)">Crafted Locally, Cherished Globally</div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:26px 40px 0;max-width:1320px;margin:0 auto">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:26px 32px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);display:grid;grid-template-columns:1fr 340px;gap:36px;align-items:center">
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#64748B">Founding Sellers · Tier 1 Diamond</div>
+          <div style="font:800 14px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1">1,153 claimed</div>
+        </div>
+        <div style="height:8px;border-radius:20px;background:rgba(11,15,25,.08);margin-top:14px;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0 76.9% 0 0;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);border-radius:20px"></div>
+        </div>
+        <div style="font:500 13.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:12px">3,847 of 5,000 Tier-1 spots left — 25 free slots for 6 months, homepage feature, Diamond badge.</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <span style="flex:1;font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:15px;border-radius:40px;text-align:center;box-shadow:0 6px 20px rgba(99,102,241,.32)">Claim a slot</span>
+        <span style="flex:1;font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:14px;border-radius:40px;text-align:center">See the fees</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:25px 0;display:flex;justify-content:center">
+    <div style="display:flex;justify-content:center;gap:6px;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);padding:6px;border-radius:40px;border:1px solid rgba(255,255,255,.9)">
+      <span style="padding:10px 24px;border-radius:30px;font:600 13.5px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;background:rgba(255,255,255,.9)">Paintings &amp; Canvas</span>
+      <span style="padding:10px 24px;border-radius:30px;font:600 13.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Handcrafted Objects</span>
+      <span style="padding:10px 24px;border-radius:30px;font:600 13.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Verified Makers only</span>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:15px 40px 60px;max-width:1320px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="height:250px;background:#DDD url('https://picsum.photos/600/500?random=101') center/cover;padding:16px;display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 11px/1 'Plus Jakarta Sans',sans-serif;padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 1.2 km away</span>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;flex-grow:1">
+          <div style="font:700 19px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-bottom:6px">Monsoon Serenade in Oils</div>
+          <div style="font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-bottom:18px">Rohan's Fine Art Studio</div>
+          <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+            <span style="font:800 21px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹3,400</span>
+            <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:9px 18px;border-radius:40px">Inquire Piece</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="height:250px;background:#DDD url('https://picsum.photos/600/500?random=102') center/cover;padding:16px;display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 11px/1 'Plus Jakarta Sans',sans-serif;padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 2.4 km away</span>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;flex-grow:1">
+          <div style="font:700 19px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-bottom:6px">Botanical Watercolors</div>
+          <div style="font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-bottom:18px">Priya Atelier</div>
+          <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+            <span style="font:800 21px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹1,200</span>
+            <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:9px 18px;border-radius:40px">Inquire Piece</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="height:250px;background:#DDD url('https://picsum.photos/600/500?random=107') center/cover;padding:16px;display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 11px/1 'Plus Jakarta Sans',sans-serif;padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 1.8 km away</span>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;flex-grow:1">
+          <div style="font:700 19px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-bottom:6px">Hand-Thrown Ceramic Vessel</div>
+          <div style="font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-bottom:18px">Clay &amp; Kiln Co.</div>
+          <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+            <span style="font:800 21px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹1,600</span>
+            <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:9px 18px;border-radius:40px">Inquire Piece</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="height:250px;background:#DDD url('https://picsum.photos/600/500?random=109') center/cover;padding:16px;display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 11px/1 'Plus Jakarta Sans',sans-serif;padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 0.5 km away</span>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;flex-grow:1">
+          <div style="font:700 19px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-bottom:6px">Brass &amp; Terracotta Lantern</div>
+          <div style="font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-bottom:18px">Kumbh Craft House</div>
+          <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+            <span style="font:800 21px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹2,100</span>
+            <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:9px 18px;border-radius:40px">Inquire Piece</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;display:flex;justify-content:center;padding:6px 0 34px;opacity:.9;color:color-mix(in srgb, #6366F1 58%, #B8860B 42%)">
+    <svg viewBox="0 0 900 60" style="width:100%;max-width:900px;height:auto" aria-hidden="true">
+      <line x1="10" y1="6" x2="890" y2="6" stroke="currentColor" stroke-width="1"></line>
+      <g fill="none" stroke="currentColor" stroke-width="1.1">
+        <path d="M60,6 Q60,30 48,40 Q60,50 72,40 Q60,30 60,6"></path>
+        <path d="M180,6 Q180,32 168,44 Q180,54 192,44 Q180,32 180,6"></path>
+        <path d="M300,6 Q300,30 288,40 Q300,50 312,40 Q300,30 300,6"></path>
+        <path d="M420,6 Q420,34 408,46 Q420,56 432,46 Q420,34 420,6"></path>
+        <path d="M540,6 Q540,30 528,40 Q540,50 552,40 Q540,30 540,6"></path>
+        <path d="M660,6 Q660,32 648,44 Q660,54 672,44 Q660,32 660,6"></path>
+        <path d="M780,6 Q780,30 768,40 Q780,50 792,40 Q780,30 780,6"></path>
+      </g>
+      <g fill="currentColor">
+        <circle cx="120" cy="16" r="2"></circle><circle cx="240" cy="16" r="2"></circle><circle cx="360" cy="16" r="2"></circle><circle cx="480" cy="16" r="2"></circle><circle cx="600" cy="16" r="2"></circle><circle cx="720" cy="16" r="2"></circle><circle cx="840" cy="16" r="2"></circle>
+      </g>
+    </svg>
+  </div>
+
+  <div style="position:relative;padding:0 40px;max-width:1320px;margin:0 auto">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:36px;padding:50px;margin-bottom:56px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%)"></div>
+      <svg viewBox="0 0 70 70" style="position:absolute;width:70px;height:70px;top:14px;left:14px;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%);opacity:.78;animation:cg-glimmer 5s ease-in-out infinite" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4,30 A26,26 0 0,1 30,4"></path><path d="M4,18 A38,38 0 0,1 18,4"></path><path d="M4,42 A50,50 0 0,1 42,4"></path></g><circle cx="4" cy="4" r="2.4" fill="url(#cgJewel)"></circle></svg>
+      <svg viewBox="0 0 70 70" style="position:absolute;width:70px;height:70px;bottom:14px;right:14px;transform:rotate(180deg);color:color-mix(in srgb, #6366F1 62%, #B8860B 38%);opacity:.78;animation:cg-glimmer 5s ease-in-out 1.6s infinite" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4,30 A26,26 0 0,1 30,4"></path><path d="M4,18 A38,38 0 0,1 18,4"></path><path d="M4,42 A50,50 0 0,1 42,4"></path></g><circle cx="4" cy="4" r="2.4" fill="url(#cgJewel)"></circle></svg>
+      <div style="position:relative">
+        <h2 style="font:800 40px/1.15 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:0 0 12px">Raw Vision, Timeless Heritage</h2>
+        <p style="font:500 15px/1.7 'Plus Jakarta Sans',sans-serif;color:#64748B;margin:0 0 28px">Every piece tells a story born from heritage craftsmanship. Share your talent with neighbors nearby and admirers across the globe.</p>
+        <span style="display:inline-block;font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:15px 28px;border-radius:40px;box-shadow:0 6px 20px rgba(99,102,241,.32)">Share Your Art Globally</span>
+      </div>
+      <div style="position:relative;background:rgba(255,255,255,.75);padding:24px;border-radius:20px;border:1px solid rgba(255,255,255,.9)">
+        <div style="font:700 18px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-bottom:6px">Meera’s Clay Atelier</div>
+        <div style="font:700 12px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;margin-bottom:10px">Bandra West • 1.4 km away</div>
+        <p style="font:500 13px/1.6 'Plus Jakarta Sans',sans-serif;color:#64748B;margin:0">"Crafting slow-made stoneware ceramics right in the neighborhood—shipped with pride across the globe."</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:0 40px 56px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:30px 30px 28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="font:800 52px/1 'Plus Jakarta Sans',sans-serif;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0%</div>
+      <div style="font:700 12.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#0B0F19;margin-top:14px">Commission on the sale</div>
+      <p style="font:500 13.5px/1.65 'Plus Jakarta Sans',sans-serif;color:#64748B;margin:10px 0 0">The seller keeps 100% of what the buyer pays. CraftGali never touches the transaction — we charge for the shelf space, not the sale.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:30px 30px 28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="font:800 52px/1 'Plus Jakarta Sans',sans-serif;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">20s</div>
+      <div style="font:700 12.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#0B0F19;margin-top:14px">Verified Maker check</div>
+      <p style="font:500 13.5px/1.65 'Plus Jakarta Sans',sans-serif;color:#64748B;margin:10px 0 0">A short unedited studio clip — the artist, two of their listed pieces, and a handwritten slip with their handle and the date.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:30px 30px 28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="font:800 52px/1 'Plus Jakarta Sans',sans-serif;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">142</div>
+      <div style="font:700 12.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#0B0F19;margin-top:14px">Safe Exchange Zones</div>
+      <p style="font:500 13.5px/1.65 'Plus Jakarta Sans',sans-serif;color:#64748B;margin:10px 0 0">Vetted public handover points across 11 cities. Exact addresses are never stored on a listing — neighbourhood and city only.</p>
+    </div>
+  </div>
+
+  <div style="position:relative;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.9);padding:40px 0">
+    <svg viewBox="0 0 100 100" style="position:absolute;right:24px;top:50%;transform:translateY(-50%);width:84px;height:84px;opacity:.28;color:color-mix(in srgb, #6366F1 70%, #B8860B 30%)" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="50" cy="50" r="6" fill="currentColor"></circle><g stroke="currentColor" stroke-width="1.4"><line x1="50" y1="6" x2="50" y2="94"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(15 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(30 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(45 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(60 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(75 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(90 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(105 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(120 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(135 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(150 50 50)"></line><line x1="50" y1="6" x2="50" y2="94" transform="rotate(165 50 50)"></line></g></svg>
+    <div style="max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;font:500 13px/1.5 'Plus Jakarta Sans',sans-serif;color:#64748B">
+      <div style="font:700 20px/1 'Playfair Display',serif;color:#0B0F19">Craft<em style="font-style:italic;color:#6366F1">Gali</em></div>
+      <div>© 2026 CraftGali — Supporting Artisans Reaching Every Corner of the World</div>
+    </div>
+  </div>
+</div>
+
+<div style="width:390px;position:relative;overflow:hidden;background:#F4F5FB;border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.14)">
+  <div style="position:absolute;top:-90px;left:-120px;width:420px;height:420px;border-radius:50%;background:#DDD6FE;filter:blur(120px);opacity:.4"></div>
+  <div style="position:absolute;bottom:140px;right:-140px;width:420px;height:420px;border-radius:50%;background:#FCE7F3;filter:blur(120px);opacity:.4"></div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%)" aria-hidden="true"><rect width="100%" height="100%" fill="url(#cgTapestry)"></rect></svg>
+
+  <div style="position:relative;padding:10px 8px 0">
+    <div style="background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="font:700 20px/1 'Playfair Display',serif;color:#0B0F19">Craft<em style="font-style:italic;color:#6366F1">Gali</em></div>
+      <div style="display:flex;gap:4px;align-items:center">
+        <div style="display:flex;gap:4px;align-items:center;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:4px 6px;border-radius:30px">
+          <span style="width:13px;height:13px;border-radius:50%;background:#6366F1;border:2px solid #0B0F19"></span>
+          <span style="width:13px;height:13px;border-radius:50%;background:#DC2626"></span>
+          <span style="width:13px;height:13px;border-radius:50%;background:#EC4899"></span>
+          <span style="width:13px;height:13px;border-radius:50%;background:#14B8A6"></span>
+        </div>
+        <span style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:12px">🌙</span>
+        <span style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:8px 12px;border-radius:40px">Atelier</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:28px 16px 18px;text-align:center">
+    <svg viewBox="0 0 640 640" width="420" height="420" style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);opacity:.2;color:color-mix(in srgb, #6366F1 65%, #B8860B 35%)" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="320" cy="320" r="300" stroke-width="2"></circle><circle cx="320" cy="320" r="255" stroke-width="2" stroke-dasharray="4 16"></circle><circle cx="320" cy="320" r="210" stroke-width="2"></circle><circle cx="320" cy="320" r="70" stroke-width="2"></circle></g></svg>
+    <div style="position:relative">
+      <div style="font:600 italic 15px/1.3 'Playfair Display',serif;color:#6366F1;margin-bottom:8px">Passionate hands, Legendary art</div>
+      <h1 style="font:800 28px/1.2 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:0 0 12px">Reaching Every Corner <em style="font-style:normal;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">of the World</em></h1>
+      <p style="font:500 14px/1.6 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.82);margin:0 0 20px">Explore breathtaking canvases, sculptures, and decor curated directly from independent makers in your creative ecosystem.</p>
+      <div style="background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);text-align:left">
+        <div style="display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.4)">
+          <span style="font-size:14px">📍</span><span style="font:500 13.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Bandra West · 10 km</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:14px">🔍</span><span style="font:500 13.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Search artwork or studio…</span>
+        </div>
+        <span style="font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:14px;border-radius:40px;text-align:center;box-shadow:0 6px 20px rgba(99,102,241,.32)">Explore near me</span>
+      </div>
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#6366F1;background:rgba(255,255,255,.75);padding:8px 16px;border-radius:30px;display:inline-block;margin-top:18px;border:1px solid rgba(255,255,255,.9)">Crafted Locally, Cherished Globally</div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:0 16px 18px">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:18px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between">
+        <div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#64748B">Tier 1 Diamond</div>
+        <div style="font:800 12px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1">3,847 left</div>
+      </div>
+      <div style="height:7px;border-radius:20px;background:rgba(11,15,25,.08);margin-top:10px;position:relative;overflow:hidden"><div style="position:absolute;inset:0 76.9% 0 0;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);border-radius:20px"></div></div>
+      <div style="font:500 11.5px/1.55 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:10px">25 free slots for 6 months, homepage feature, Diamond badge.</div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:0 16px 16px;display:flex;justify-content:center">
+    <div style="display:flex;gap:5px;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);padding:5px;border-radius:40px;border:1px solid rgba(255,255,255,.9)">
+      <span style="padding:9px 14px;border-radius:30px;font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;background:rgba(255,255,255,.9)">Paintings</span>
+      <span style="padding:9px 14px;border-radius:30px;font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Handcrafted</span>
+      <span style="padding:9px 14px;border-radius:30px;font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Verified</span>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:0 16px 20px;display:flex;flex-direction:column;gap:16px">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="height:200px;background:#DDD url('https://picsum.photos/600/500?random=101') center/cover;padding:14px;display:flex;align-items:flex-start">
+        <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 1.2 km away</span>
+      </div>
+      <div style="padding:18px">
+        <div style="font:700 17px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Monsoon Serenade in Oils</div>
+        <div style="font:500 12.5px/1.4 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:5px">Rohan's Fine Art Studio</div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+          <span style="font:800 19px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹3,400</span>
+          <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:9px 16px;border-radius:40px">Inquire</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="height:200px;background:#DDD url('https://picsum.photos/600/500?random=107') center/cover;padding:14px;display:flex;align-items:flex-start">
+        <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 1.8 km away</span>
+      </div>
+      <div style="padding:18px">
+        <div style="font:700 17px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Hand-Thrown Ceramic Vessel</div>
+        <div style="font:500 12.5px/1.4 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:5px">Clay &amp; Kiln Co.</div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+          <span style="font:800 19px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹1,600</span>
+          <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:9px 16px;border-radius:40px">Inquire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.9);padding:22px 16px;font:500 11.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#64748B;text-align:center">
+    <div style="font:700 18px/1 'Playfair Display',serif;color:#0B0F19;margin-bottom:8px">Craft<em style="font-style:italic;color:#6366F1">Gali</em></div>
+    © 2026 CraftGali — Supporting Artisans Reaching Every Corner of the World
+  </div>
+</div>
+
+</div>
+</div>
+
+<div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1c">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.55)"><a href="#1c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(11,15,25,.08);color:#0B0F19;border-radius:5px">1c</a>P2 Discover feed — desktop 1440. Filters as a glass rail, your artwork card at feed density.</div>
+<div style="width:1440px;position:relative;overflow:hidden;background:#F4F5FB;border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.14)">
+  <div style="position:absolute;top:-140px;left:-120px;width:640px;height:640px;border-radius:50%;background:#DDD6FE;filter:blur(150px);opacity:.35"></div>
+  <div style="position:absolute;top:420px;right:-160px;width:700px;height:700px;border-radius:50%;background:#C7D2FE;filter:blur(150px);opacity:.35"></div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%)" aria-hidden="true"><rect width="100%" height="100%" fill="url(#cgTapestry)"></rect></svg>
+
+  <div style="position:relative;padding:20px 20px 0">
+    <div style="background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);padding:12px 24px;display:flex;align-items:center;gap:20px">
+      <div style="font:700 22px/1 'Playfair Display',serif;color:#0B0F19">Craft<em style="font-style:italic;color:#6366F1">Gali</em></div>
+      <div style="flex:1;max-width:620px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:50px;padding:9px 10px 9px 18px">
+        <span style="font-size:14px">📍</span>
+        <span style="font:500 13px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;padding-right:14px;border-right:1px solid rgba(11,15,25,.1)">Bandra West · 10 km</span>
+        <span style="font-size:14px">🔍</span>
+        <span style="font:500 13px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;flex:1">oil painting</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:10px 16px;border-radius:40px">Saved</span>
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:10px 16px;border-radius:40px">Messages <span style="display:inline-block;background:linear-gradient(135deg,#6366F1,#9333EA);color:#fff;font:700 10px/1 'Plus Jakarta Sans',sans-serif;padding:3px 6px;border-radius:20px;vertical-align:1px">3</span></span>
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:11px 18px;border-radius:40px;box-shadow:0 6px 20px rgba(99,102,241,.32)">My Atelier</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#DDD url('https://picsum.photos/60/60?random=500') center/cover;border:1px solid rgba(255,255,255,.9)"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;display:grid;grid-template-columns:290px 1fr;gap:24px;padding:26px 40px 56px;align-items:start">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:24px 24px 26px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Stream</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px">
+        <span style="font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);padding:11px 14px;border-radius:30px">Everything · 7,187</span>
+        <span style="font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;padding:11px 14px;border-radius:30px">Paintings &amp; Canvas · 4,206</span>
+        <span style="font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;padding:11px 14px;border-radius:30px">Handcrafted Objects · 2,981</span>
+      </div>
+
+      <div style="height:1px;background:rgba(11,15,25,.08);margin:22px 0"></div>
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Price</div>
+      <div style="margin-top:18px">
+        <div style="height:6px;border-radius:20px;background:rgba(11,15,25,.08);position:relative">
+          <div style="position:absolute;left:8%;right:42%;top:0;height:6px;background:linear-gradient(135deg,#6366F1,#9333EA);border-radius:20px"></div>
+          <div style="position:absolute;left:8%;top:-5px;width:16px;height:16px;background:#fff;border:2px solid #6366F1;border-radius:50%;margin-left:-8px;box-shadow:0 4px 10px rgba(31,38,135,.16)"></div>
+          <div style="position:absolute;left:58%;top:-5px;width:16px;height:16px;background:#fff;border:2px solid #6366F1;border-radius:50%;margin-left:-8px;box-shadow:0 4px 10px rgba(31,38,135,.16)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-top:14px"><span>₹800</span><span>₹25,000</span></div>
+      </div>
+
+      <div style="height:1px;background:rgba(11,15,25,.08);margin:22px 0"></div>
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Medium</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:14px">
+        <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:8px 13px;border-radius:20px">Oil ✕</span>
+        <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:8px 13px;border-radius:20px">Acrylic</span>
+        <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:8px 13px;border-radius:20px">Watercolour</span>
+        <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:8px 13px;border-radius:20px">Ceramic</span>
+        <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:8px 13px;border-radius:20px">Macramé</span>
+        <span style="font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:8px 13px;border-radius:20px">Brass</span>
+      </div>
+
+      <div style="height:1px;background:rgba(11,15,25,.08);margin:22px 0"></div>
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Trust</div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+        <div style="display:flex;gap:11px;align-items:flex-start"><span style="width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,#6366F1,#9333EA);flex:none;display:flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><path d="M4 12.5 9.5 18 20 6.5"></path></svg></span><div><div style="font:600 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Verified Maker only</div><div style="font:500 11px/1.45 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:3px">Studio video checked</div></div></div>
+        <div style="display:flex;gap:11px;align-items:center"><span style="width:18px;height:18px;border-radius:6px;border:1.5px solid rgba(11,15,25,.18);flex:none"></span><span style="font:600 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#64748B">Verified Artist (ID)</span></div>
+        <div style="display:flex;gap:11px;align-items:center"><span style="width:18px;height:18px;border-radius:6px;border:1.5px solid rgba(11,15,25,.18);flex:none"></span><span style="font:600 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#64748B">Hide AI-assisted work</span></div>
+      </div>
+
+      <div style="height:1px;background:rgba(11,15,25,.08);margin:22px 0"></div>
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Handover</div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+        <div style="display:flex;gap:11px;align-items:center"><span style="width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,#6366F1,#9333EA);flex:none;display:flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><path d="M4 12.5 9.5 18 20 6.5"></path></svg></span><span style="font:600 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Meet in person</span></div>
+        <div style="display:flex;gap:11px;align-items:center"><span style="width:18px;height:18px;border-radius:6px;border:1.5px solid rgba(11,15,25,.18);flex:none"></span><span style="font:600 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#64748B">Seller couriers</span></div>
+        <div style="display:flex;gap:11px;align-items:center"><span style="width:18px;height:18px;border-radius:6px;border:1.5px solid rgba(11,15,25,.18);flex:none"></span><span style="font:600 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#64748B">Buyer arranges pickup</span></div>
+      </div>
+
+      <div style="margin-top:24px;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:16px 18px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#6366F1,#9333EA)"></div>
+        <div style="font:700 12px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Save this search</div>
+        <div style="font:500 11.5px/1.55 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Get told when oil paintings under ₹25,000 appear within 10 km.</div>
+      </div>
+    </div>
+
+    <div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between">
+        <div>
+          <h2 style="font:800 32px/1.1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:0">Discover</h2>
+          <div style="font:500 13px/1.5 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:8px">1,412 pieces · Oil · within 10 km of Bandra West · Verified Makers</div>
+        </div>
+        <div style="display:flex;gap:5px;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);padding:5px;border-radius:40px;border:1px solid rgba(255,255,255,.9)">
+          <span style="padding:9px 16px;border-radius:30px;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;background:rgba(255,255,255,.9)">For you</span>
+          <span style="padding:9px 16px;border-radius:30px;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Newest</span>
+          <span style="padding:9px 16px;border-radius:30px;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Nearest</span>
+          <span style="padding:9px 16px;border-radius:30px;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Price</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:24px">
+        <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+          <div style="height:240px;background:#DDD url('https://picsum.photos/600/500?random=101') center/cover;padding:14px;display:flex;justify-content:space-between;align-items:flex-start">
+            <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 1.2 km</span>
+            <span style="background:rgba(255,255,255,.9);color:#6366F1;font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:20px">Verified maker</span>
+          </div>
+          <div style="padding:20px">
+            <div style="font:700 18px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Monsoon Serenade in Oils</div>
+            <div style="font:500 12.5px/1.45 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Rohan's Fine Art Studio · Oil on canvas · 90×60 cm</div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+              <span style="font:800 20px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹3,400</span>
+              <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:9px 16px;border-radius:40px">Inquire</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+          <div style="height:240px;background:#DDD url('https://picsum.photos/600/500?random=131') center/cover;padding:14px;display:flex;justify-content:space-between;align-items:flex-start">
+            <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 3.1 km</span>
+            <span style="background:rgba(255,255,255,.9);color:#6366F1;font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:20px">Verified maker</span>
+          </div>
+          <div style="padding:20px">
+            <div style="font:700 18px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Wet Tarmac, Baner Road</div>
+            <div style="font:500 12.5px/1.45 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Anaya Deshpande · Oil on linen · 76×50 cm</div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+              <span style="font:800 20px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹16,000</span>
+              <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:9px 16px;border-radius:40px">Inquire</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+          <div style="height:240px;background:#DDD url('https://picsum.photos/600/500?random=102') center/cover;padding:14px;display:flex;justify-content:space-between;align-items:flex-start">
+            <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 2.4 km</span>
+          </div>
+          <div style="padding:20px">
+            <div style="font:700 18px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Botanical Watercolors</div>
+            <div style="font:500 12.5px/1.45 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Priya Atelier · Watercolour · 40×30 cm</div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+              <span style="font:800 20px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹1,200</span>
+              <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:9px 16px;border-radius:40px">Inquire</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+          <div style="height:240px;background:#DDD url('https://picsum.photos/600/500?random=107') center/cover;padding:14px;display:flex;align-items:flex-start">
+            <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 1.8 km</span>
+          </div>
+          <div style="padding:20px">
+            <div style="font:700 18px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Hand-Thrown Ceramic Vessel</div>
+            <div style="font:500 12.5px/1.45 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Clay &amp; Kiln Co. · Stoneware · 28 cm</div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+              <span style="font:800 20px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹1,600</span>
+              <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:9px 16px;border-radius:40px">Inquire</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+          <div style="height:240px;background:#DDD url('https://picsum.photos/600/500?random=109') center/cover;padding:14px;display:flex;align-items:flex-start">
+            <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 0.5 km</span>
+          </div>
+          <div style="padding:20px">
+            <div style="font:700 18px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Brass &amp; Terracotta Lantern</div>
+            <div style="font:500 12.5px/1.45 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Kumbh Craft House · Brass · 34 cm</div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+              <span style="font:800 20px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹2,100</span>
+              <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:9px 16px;border-radius:40px">Inquire</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border-radius:30px;border:1px solid rgba(255,255,255,.9);overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+          <div style="height:240px;background:#DDD url('https://picsum.photos/600/500?random=310') center/cover;padding:14px;display:flex;align-items:flex-start">
+            <span style="background:rgba(11,15,25,.6);backdrop-filter:blur(12px);color:#fff;font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.15)">📍 4.6 km</span>
+          </div>
+          <div style="padding:20px">
+            <div style="font:700 18px/1.25 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Indigo Resist Wall Hanging</div>
+            <div style="font:500 12.5px/1.45 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:6px">Nilambari Handloom · Natural dye · 120×80 cm</div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:space-between">
+              <span style="font:800 20px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹5,800</span>
+              <span style="font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:9px 16px;border-radius:40px">Inquire</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1d">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.55)"><a href="#1d" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(11,15,25,.08);color:#0B0F19;border-radius:5px">1d</a>P6 Listing detail — desktop 1440. The buy rail is glass; the safety notice is the only non-glass panel.</div>
+<div style="width:1440px;position:relative;overflow:hidden;background:#F4F5FB;border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.14)">
+  <div style="position:absolute;top:-120px;right:-120px;width:640px;height:640px;border-radius:50%;background:#C7D2FE;filter:blur(150px);opacity:.35"></div>
+  <div style="position:absolute;bottom:-100px;left:-80px;width:560px;height:560px;border-radius:50%;background:#FCE7F3;filter:blur(150px);opacity:.35"></div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%)" aria-hidden="true"><rect width="100%" height="100%" fill="url(#cgTapestry)"></rect></svg>
+
+  <div style="position:relative;padding:20px 20px 0">
+    <div style="background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);padding:14px 28px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:20px">
+        <div style="font:700 22px/1 'Playfair Display',serif;color:#0B0F19">Craft<em style="font-style:italic;color:#6366F1">Gali</em></div>
+        <div style="font:500 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Discover / Paintings / Oil / <span style="color:#0B0F19;font-weight:600">Monsoon Serenade in Oils</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:10px 16px;border-radius:40px">Share</span>
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:10px 16px;border-radius:40px">Report</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#DDD url('https://picsum.photos/60/60?random=500') center/cover;border:1px solid rgba(255,255,255,.9)"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;display:grid;grid-template-columns:1fr 460px;gap:26px;padding:28px 40px 56px;align-items:start">
+    <div>
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:36px;padding:36px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);display:flex;justify-content:center;position:relative;overflow:hidden">
+        <svg viewBox="0 0 70 70" style="position:absolute;width:70px;height:70px;top:14px;left:14px;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%);opacity:.78;animation:cg-glimmer 5s ease-in-out infinite" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4,30 A26,26 0 0,1 30,4"></path><path d="M4,18 A38,38 0 0,1 18,4"></path><path d="M4,42 A50,50 0 0,1 42,4"></path></g><circle cx="4" cy="4" r="2.4" fill="url(#cgJewel)"></circle></svg>
+        <div style="background:#fff;padding:18px;border-radius:8px;box-shadow:0 26px 60px -22px rgba(31,38,135,.4)"><div style="width:600px;height:400px;background:#DDD url('https://picsum.photos/900/600?random=101') center/cover;border-radius:4px"></div></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <div style="width:88px;height:66px;background:#DDD url('https://picsum.photos/200/160?random=101') center/cover;border-radius:14px;outline:2px solid #6366F1;outline-offset:2px"></div>
+        <div style="width:88px;height:66px;background:#DDD url('https://picsum.photos/200/160?random=151') center/cover;border-radius:14px"></div>
+        <div style="width:88px;height:66px;background:#DDD url('https://picsum.photos/200/160?random=152') center/cover;border-radius:14px"></div>
+        <div style="width:88px;height:66px;background:#DDD url('https://picsum.photos/200/160?random=153') center/cover;border-radius:14px"></div>
+        <div style="width:88px;height:66px;border-radius:14px;background:linear-gradient(135deg,#6366F1,#9333EA);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 6h16v12H4z"></path><path d="M10 9.5 15 12l-5 2.5z" fill="#fff" stroke="none"></path></svg><span style="font:700 7.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#fff">Making of</span></div>
+        <div style="width:88px;height:66px;border-radius:14px;border:1px dashed rgba(11,15,25,.25);display:flex;align-items:center;justify-content:center"><span style="font:700 8px/1.35 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#64748B;text-align:center">On<br>your wall</span></div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:34px 36px 30px;margin-top:22px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">The making of</div>
+        <p style="font:500 15.5px/1.75 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:16px 0 0;max-width:62ch;text-wrap:pretty">I started this on the 4th of July, the first real day of the monsoon in Pune, sitting under the awning of a chai stall on Baner Road because I couldn't get home. The colour of wet tarmac at that hour is not grey. It's a warm violet with orange sodium light sitting on top of it, and it lasts about twenty minutes.</p>
+        <p style="font:500 15.5px/1.75 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:16px 0 0;max-width:62ch;text-wrap:pretty">Nine sittings, two of them scraped back entirely. The final glaze layer is Prussian blue over burnt sienna, which is what gives the puddles their depth. Unframed — I'd rather you choose the frame than pay me to guess.</p>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px">
+          <div style="background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:16px 18px"><div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#64748B">Hours invested</div><div style="font:800 22px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-top:10px">38</div></div>
+          <div style="background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:16px 18px"><div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#64748B">Materials</div><div style="font:800 22px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-top:10px">Oil, linen</div></div>
+          <div style="background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:16px 18px"><div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#64748B">Size</div><div style="font:800 22px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-top:10px">90×60 cm</div></div>
+          <div style="background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:16px 18px"><div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#64748B">Edition</div><div style="font:800 22px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin-top:10px">One of one</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:30px 28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#6366F1,#9333EA)"></div>
+        <h1 style="font:800 30px/1.2 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:0">Monsoon Serenade in Oils</h1>
+        <div style="font:500 12.5px/1.5 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:10px">Oil on linen · 90×60 cm · 2026 · unframed</div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255,255,.4)">
+          <span style="font:800 38px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">₹3,400</span>
+          <span style="font:600 11.5px/1.4 'Plus Jakarta Sans',sans-serif;color:#6366F1">Artist keeps<br>every rupee</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:22px">
+          <span style="font:600 14px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:17px;border-radius:40px;text-align:center;box-shadow:0 6px 20px rgba(99,102,241,.32)">Message Anaya</span>
+          <span style="font:600 14px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);padding:16px;border-radius:40px;text-align:center">Make an offer</span>
+          <div style="display:flex;gap:10px">
+            <span style="flex:1;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:13px;border-radius:40px;text-align:center">♡ Save</span>
+            <span style="flex:1;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:13px;border-radius:40px;text-align:center">Share</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);border-radius:24px;padding:20px 22px;box-shadow:0 14px 34px -14px rgba(99,102,241,.5)">
+        <div style="font:800 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#fff">Never pay in advance.</div>
+        <div style="font:500 12px/1.6 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.92);margin-top:6px">CraftGali does not process payments and cannot recover money sent outside the app. Pay on handover, at a Safe Exchange Zone.</div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:24px 26px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Handover</div>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px">
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:15px;line-height:1.2">📍</span><div><div style="font:600 13px/1.35 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Meet in person · within 12 km of Baner</div><div style="font:500 11.5px/1.5 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:3px">Suggested: Westend Mall atrium — a Safe Exchange Zone</div></div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:15px;line-height:1.2">🚚</span><div><div style="font:600 13px/1.35 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Artist couriers at cost</div><div style="font:500 11.5px/1.5 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:3px">Rolled in a tube, ~₹450 within India</div></div></div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:24px 26px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="display:flex;gap:15px;align-items:center">
+          <div style="width:58px;height:58px;border-radius:50%;background:#DDD url('https://picsum.photos/120/120?random=201') center/cover;flex:none;border:2px solid rgba(255,255,255,.9)"></div>
+          <div>
+            <div style="font:700 19px/1.2 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Anaya Deshpande</div>
+            <div style="font:500 11.5px/1.4 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:5px">@anaya · Pune · joined 2023</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:7px;margin-top:16px;flex-wrap:wrap">
+          <span style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:7px 12px;border-radius:20px">Verified Maker</span>
+          <span style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#64748B;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);padding:7px 12px;border-radius:20px">Diamond</span>
+          <span style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#64748B;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);padding:7px 12px;border-radius:20px">64 sold</span>
+        </div>
+        <div style="display:flex;gap:24px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.4)">
+          <div><div style="font:800 18px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">4.9</div><div style="font:500 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:5px">41 reviews</div></div>
+          <div><div style="font:800 18px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">2h</div><div style="font:500 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:5px">Replies in</div></div>
+          <div><div style="font:800 18px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">31</div><div style="font:500 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:5px">Pieces live</div></div>
+        </div>
+        <div style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;margin-top:18px">Visit the atelier →</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1e">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.55)"><a href="#1e" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(11,15,25,.08);color:#0B0F19;border-radius:5px">1e</a>S3 Studio dashboard — desktop 1440, your dark mode. Same tokens, dark surfaces.</div>
+<div style="width:1440px;position:relative;overflow:hidden;background:#090D16;border:1px solid rgba(255,255,255,.12);border-radius:28px;box-shadow:0 20px 40px -15px rgba(0,0,0,.5)">
+  <div style="position:absolute;top:-120px;left:-120px;width:660px;height:660px;border-radius:50%;background:#312E81;filter:blur(150px);opacity:.2"></div>
+  <div style="position:absolute;bottom:-120px;right:-120px;width:660px;height:660px;border-radius:50%;background:#581C87;filter:blur(150px);opacity:.2"></div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.13;color:color-mix(in srgb, #818CF8 78%, #E8C15A 22%)" aria-hidden="true"><rect width="100%" height="100%" fill="url(#cgTapestry)"></rect></svg>
+
+  <div style="position:relative;padding:20px 20px 0">
+    <div style="background:rgba(15,23,42,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:28px;box-shadow:0 20px 40px -15px rgba(0,0,0,.5);padding:14px 30px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:34px">
+        <div style="font:700 22px/1 'Playfair Display',serif;color:#F8FAFC">Craft<em style="font-style:italic;color:#818CF8">Gali</em> <span style="font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#94A3B8;margin-left:6px">Studio</span></div>
+        <div style="display:flex;gap:22px;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#94A3B8">
+          <span style="color:#818CF8">Today</span><span>Pieces</span><span>Offers</span><span>Storefront</span><span>Insights</span><span>Plan &amp; slots</span><span>Verification</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:38px;height:38px;border-radius:50%;background:rgba(30,41,59,.75);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:15px">☀️</span>
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#818CF8 0%,#C084FC 100%);padding:11px 20px;border-radius:40px;box-shadow:0 6px 20px rgba(129,140,248,.28)">Add a piece</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333 url('https://picsum.photos/60/60?random=201') center/cover;border:1px solid rgba(255,255,255,.14)"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:32px 40px 0;display:flex;align-items:flex-end;justify-content:space-between">
+    <div>
+      <h1 style="font:800 36px/1.1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC;margin:0">Good evening, Anaya</h1>
+      <div style="font:500 13px/1.5 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:10px">Thursday, 3 September · Pro Studio · Diamond founding seller #3,214</div>
+    </div>
+    <div style="font:500 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#94A3B8">Atelier: <span style="color:#F8FAFC;font-weight:600">craftgali.com/@anaya</span> · <span style="color:#818CF8;font-weight:600">Copy link</span></div>
+  </div>
+
+  <div style="position:relative;padding:24px 40px 0;display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:20px">
+    <div style="background:linear-gradient(135deg,rgba(129,140,248,.22) 0%,rgba(192,132,252,.18) 100%);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.14);border-radius:30px;padding:26px 28px 24px">
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#C084FC">Next best thing to do</div>
+      <div style="font:700 24px/1.3 'Plus Jakarta Sans',sans-serif;color:#F8FAFC;margin-top:14px;text-wrap:pretty">Three people asked about <em style="font-style:italic;color:#C084FC">Wet Tarmac, Baner Road</em> and none of them got a reply.</div>
+      <div style="font:500 12.5px/1.65 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:12px">Your median reply time went from 2h to 9h this week. Reply time is shown on every piece you list and it feeds where you rank.</div>
+      <span style="display:inline-block;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#818CF8 0%,#C084FC 100%);padding:14px 24px;border-radius:40px;margin-top:20px;box-shadow:0 6px 20px rgba(129,140,248,.3)">Open the three chats</span>
+    </div>
+
+    <div style="background:rgba(30,41,59,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:24px 26px 22px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#94A3B8">Pieces live</div>
+        <div style="font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#818CF8">Unlimited · Pro</div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:9px;margin-top:16px"><span style="font:800 44px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">31</span><span style="font:500 13px/1 'Plus Jakarta Sans',sans-serif;color:#94A3B8">live right now</span></div>
+      <div style="display:flex;gap:3px;margin-top:18px">
+        <span style="flex:1;height:20px;border-radius:6px;background:#818CF8"></span><span style="flex:1;height:20px;border-radius:6px;background:#818CF8"></span><span style="flex:1;height:20px;border-radius:6px;background:#818CF8"></span><span style="flex:1;height:20px;border-radius:6px;background:#818CF8"></span><span style="flex:1;height:20px;border-radius:6px;background:#818CF8"></span><span style="flex:1;height:20px;border-radius:6px;background:#818CF8"></span><span style="flex:1;height:20px;border-radius:6px;background:#818CF8"></span><span style="flex:1;height:20px;border-radius:6px;background:#C084FC"></span><span style="flex:1;height:20px;border-radius:6px;background:#C084FC"></span><span style="flex:1;height:20px;border-radius:6px;background:rgba(255,255,255,.12)"></span>
+      </div>
+      <div style="font:500 11.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:14px">Slots count pieces that are <strong style="color:#F8FAFC">live at the same time</strong>, not pieces you've ever uploaded. Mark one sold and the slot frees immediately.</div>
+      <div style="font:600 11.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#818CF8;margin-top:8px">2 pieces expire in 6 days — they'll archive, never delete.</div>
+    </div>
+
+    <div style="background:rgba(30,41,59,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:24px 26px 22px">
+      <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#94A3B8">This week</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 14px;margin-top:16px">
+        <div><div style="font:800 30px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">1,284</div><div style="font:500 11px/1.4 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:6px">Views <span style="color:#2DD4BF">+18%</span></div></div>
+        <div><div style="font:800 30px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">96</div><div style="font:500 11px/1.4 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:6px">Saves <span style="color:#2DD4BF">+31%</span></div></div>
+        <div><div style="font:800 30px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">11</div><div style="font:500 11px/1.4 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:6px">Conversations</div></div>
+        <div><div style="font:800 30px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">2</div><div style="font:500 11px/1.4 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:6px">Deals agreed</div></div>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);font:500 11.5px/1.6 'Plus Jakarta Sans',sans-serif;color:#94A3B8">Most searches that found you: <strong style="color:#F8FAFC">"monsoon painting pune"</strong>, <strong style="color:#F8FAFC">"oil on linen under 5000"</strong>.</div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:20px 40px 0;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div style="background:rgba(30,41,59,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:30px;overflow:hidden">
+      <div style="padding:22px 26px 16px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.1)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#94A3B8">Offers waiting on you</div>
+        <div style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#F472B6">2 expire today</div>
+      </div>
+      <div style="padding:18px 26px;display:flex;gap:16px;align-items:center;border-bottom:1px solid rgba(255,255,255,.07)">
+        <div style="width:54px;height:54px;border-radius:16px;background:#333 url('https://picsum.photos/120/120?random=131') center/cover;flex:none"></div>
+        <div style="flex:1"><div style="font:700 15px/1.3 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">Wet Tarmac, Baner Road</div><div style="font:500 11.5px/1.4 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:5px">Rhea M. offered ₹13,500 · asking ₹16,000</div></div>
+        <div style="display:flex;gap:7px"><span style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#818CF8,#C084FC);padding:10px 14px;border-radius:40px">Accept</span><span style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:40px">Counter</span></div>
+      </div>
+      <div style="padding:18px 26px 22px;display:flex;gap:16px;align-items:center">
+        <div style="width:54px;height:54px;border-radius:16px;background:#333 url('https://picsum.photos/120/120?random=134') center/cover;flex:none"></div>
+        <div style="flex:1"><div style="font:700 15px/1.3 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">Two Umbrellas, One Rickshaw</div><div style="font:500 11.5px/1.4 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:5px">Kabir S. offered ₹7,000 · asking ₹9,200</div></div>
+        <div style="display:flex;gap:7px"><span style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#818CF8,#C084FC);padding:10px 14px;border-radius:40px">Accept</span><span style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:40px">Counter</span></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(30,41,59,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:30px;overflow:hidden">
+      <div style="padding:22px 26px 16px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.1)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#94A3B8">Photo quality across your pieces</div>
+        <div style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#F8FAFC">Average 74</div>
+      </div>
+      <div style="padding:22px 26px 24px">
+        <div style="font:500 13px/1.65 'Plus Jakarta Sans',sans-serif;color:#94A3B8">Pieces scoring above 75 get <strong style="color:#F8FAFC">3.2× more views</strong>. Four of yours are below that, all for the same reason.</div>
+        <div style="display:flex;gap:12px;margin-top:18px">
+          <div style="flex:1"><div style="height:76px;border-radius:14px;background:#333 url('https://picsum.photos/160/160?random=132') center/cover"></div><div style="font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#F472B6;margin-top:9px">51 · tilted 4°</div></div>
+          <div style="flex:1"><div style="height:76px;border-radius:14px;background:#333 url('https://picsum.photos/160/160?random=133') center/cover"></div><div style="font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#F472B6;margin-top:9px">58 · tilted 3°</div></div>
+          <div style="flex:1"><div style="height:76px;border-radius:14px;background:#333 url('https://picsum.photos/160/160?random=135') center/cover"></div><div style="font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#F472B6;margin-top:9px">62 · underexposed</div></div>
+          <div style="flex:1"><div style="height:76px;border-radius:14px;background:#333 url('https://picsum.photos/160/160?random=136') center/cover"></div><div style="font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;color:#F472B6;margin-top:9px">66 · cluttered edge</div></div>
+        </div>
+        <span style="display:inline-block;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#818CF8,#C084FC);padding:14px 22px;border-radius:40px;margin-top:20px">Auto-straighten all four — preview first</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:20px 40px 44px">
+    <div style="background:rgba(30,41,59,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#818CF8,#C084FC)"></div>
+      <div>
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#C084FC">Verification centre</div>
+        <div style="font:700 19px/1.4 'Plus Jakarta Sans',sans-serif;color:#F8FAFC;margin-top:10px">Add a 20-second studio clip to unlock the Verified Maker badge.</div>
+        <div style="font:500 12.5px/1.65 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:6px">You, two of your listed pieces, and a handwritten slip with your handle and today's date. Verified Makers get 4× more messages.</div>
+      </div>
+      <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#818CF8,#C084FC);padding:16px 26px;border-radius:40px;white-space:nowrap;margin-left:30px;box-shadow:0 6px 20px rgba(129,140,248,.3)">Record it now</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<div style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px" id="1f">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.55)"><a href="#1f" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(11,15,25,.08);color:#0B0F19;border-radius:5px">1f</a>S9 Storefront editor — the artist picks one of your four hues and a mode. Pink and Teal sit behind Pro Studio ₹599.</div>
+<div style="width:1440px;position:relative;overflow:hidden;background:#F4F5FB;border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.14)">
+  <div style="position:absolute;top:-120px;left:-100px;width:600px;height:600px;border-radius:50%;background:#DDD6FE;filter:blur(150px);opacity:.35"></div>
+  <div style="position:absolute;bottom:-140px;right:-120px;width:640px;height:640px;border-radius:50%;background:#CCFBF1;filter:blur(150px);opacity:.35"></div>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:color-mix(in srgb, #6366F1 62%, #B8860B 38%)" aria-hidden="true"><rect width="100%" height="100%" fill="url(#cgTapestry)"></rect></svg>
+
+  <div style="position:relative;padding:20px 20px 0">
+    <div style="background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);padding:14px 30px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:34px">
+        <div style="font:700 22px/1 'Playfair Display',serif;color:#0B0F19">Craft<em style="font-style:italic;color:#6366F1">Gali</em> <span style="font:600 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#64748B;margin-left:6px">Studio</span></div>
+        <div style="display:flex;gap:22px;font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B"><span>Today</span><span>Pieces</span><span>Offers</span><span style="color:#6366F1">Storefront</span><span>Insights</span><span>Plan &amp; slots</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:11px 18px;border-radius:40px">Preview as buyer</span>
+        <span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);padding:12px 22px;border-radius:40px;box-shadow:0 6px 20px rgba(99,102,241,.32)">Publish changes</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:30px 40px 0">
+    <h1 style="font:800 32px/1.1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;margin:0">Your atelier skin</h1>
+    <p style="font:500 14px/1.65 'Plus Jakarta Sans',sans-serif;color:#64748B;margin:10px 0 0;max-width:70ch">One hue, one mode. It repaints your storefront header, buttons, accents and heritage tinting — buyers keep their own hue everywhere else on CraftGali.</p>
+  </div>
+
+  <div style="position:relative;padding:24px 40px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:2px solid #6366F1;border-radius:30px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.16)">
+      <div style="height:112px;background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);position:relative;display:flex;align-items:flex-end;padding:16px">
+        <div style="font:700 20px/1 'Playfair Display',serif;color:#fff">Craft<em style="font-style:italic;color:#E9D5FF">Gali</em></div>
+      </div>
+      <div style="padding:20px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font:700 17px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Electric Indigo</div>
+          <div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:6px 10px;border-radius:20px">Live</div>
+        </div>
+        <div style="font:500 12px/1.55 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:8px">Default. Cool violet glow, best for mixed-media and modern canvas work.</div>
+        <div style="display:flex;gap:6px;margin-top:14px"><span style="width:20px;height:20px;border-radius:50%;background:#6366F1"></span><span style="width:20px;height:20px;border-radius:50%;background:#9333EA"></span><span style="width:20px;height:20px;border-radius:50%;background:#DDD6FE"></span></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="height:112px;background:linear-gradient(135deg,#991B1B 0%,#EF4444 100%);display:flex;align-items:flex-end;padding:16px">
+        <div style="font:700 20px/1 'Playfair Display',serif;color:#fff">Craft<em style="font-style:italic;color:#FECACA">Gali</em></div>
+      </div>
+      <div style="padding:20px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font:700 17px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Ruby Crimson</div>
+          <div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#64748B;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);padding:6px 10px;border-radius:20px">Included</div>
+        </div>
+        <div style="font:500 12px/1.55 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:8px">Warm and loud. Suits terracotta, brass and Madhubani work.</div>
+        <div style="display:flex;gap:6px;margin-top:14px"><span style="width:20px;height:20px;border-radius:50%;background:#991B1B"></span><span style="width:20px;height:20px;border-radius:50%;background:#EF4444"></span><span style="width:20px;height:20px;border-radius:50%;background:#FEE2E2"></span></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07);position:relative">
+      <div style="height:112px;background:linear-gradient(135deg,#BE185D 0%,#EC4899 100%);display:flex;align-items:flex-end;padding:16px">
+        <div style="font:700 20px/1 'Playfair Display',serif;color:#fff">Craft<em style="font-style:italic;color:#FBCFE8">Gali</em></div>
+      </div>
+      <div style="padding:20px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font:700 17px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Light Pink</div>
+          <div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#BE185D;background:rgba(255,255,255,.9);border:1px solid #FBCFE8;padding:6px 10px;border-radius:20px">🔒 Pro</div>
+        </div>
+        <div style="font:500 12px/1.55 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:8px">Soft rose glass. Reads well for textile, embroidery and pastel work.</div>
+        <div style="display:flex;gap:6px;margin-top:14px"><span style="width:20px;height:20px;border-radius:50%;background:#BE185D"></span><span style="width:20px;height:20px;border-radius:50%;background:#EC4899"></span><span style="width:20px;height:20px;border-radius:50%;background:#FCE7F3"></span></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="height:112px;background:linear-gradient(135deg,#0F766E 0%,#14B8A6 100%);display:flex;align-items:flex-end;padding:16px">
+        <div style="font:700 20px/1 'Playfair Display',serif;color:#fff">Craft<em style="font-style:italic;color:#99F6E4">Gali</em></div>
+      </div>
+      <div style="padding:20px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font:700 17px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Teal Breeze</div>
+          <div style="font:700 9.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#0F766E;background:rgba(255,255,255,.9);border:1px solid #99F6E4;padding:6px 10px;border-radius:20px">🔒 Pro</div>
+        </div>
+        <div style="font:500 12px/1.55 'Plus Jakarta Sans',sans-serif;color:#64748B;margin-top:8px">Cool and quiet. Built for indigo resist, blue pottery and seascapes.</div>
+        <div style="display:flex;gap:6px;margin-top:14px"><span style="width:20px;height:20px;border-radius:50%;background:#0F766E"></span><span style="width:20px;height:20px;border-radius:50%;background:#14B8A6"></span><span style="width:20px;height:20px;border-radius:50%;background:#CCFBF1"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:22px 40px 0;display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start">
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:26px 28px 28px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Live preview · craftgali.com/@anaya</div>
+        <div style="display:flex;gap:5px;background:rgba(255,255,255,.9);padding:4px;border-radius:40px;border:1px solid rgba(255,255,255,.9)">
+          <span style="padding:8px 16px;border-radius:30px;font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;background:#fff">☀️ Light</span>
+          <span style="padding:8px 16px;border-radius:30px;font:600 11.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">🌙 Dark</span>
+        </div>
+      </div>
+      <div style="margin-top:18px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.9);background:#F4F5FB;position:relative">
+        <div style="position:absolute;top:-80px;left:-60px;width:340px;height:340px;border-radius:50%;background:#DDD6FE;filter:blur(100px);opacity:.5"></div>
+        <div style="position:relative;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.9)">
+          <div style="font:700 18px/1 'Playfair Display',serif;color:#0B0F19">Anaya <em style="font-style:italic;color:#6366F1">Deshpande</em></div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="font:700 9px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#6366F1,#9333EA);padding:6px 10px;border-radius:20px">Verified Maker</span>
+            <span style="font:600 11px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);padding:8px 14px;border-radius:40px">Message</span>
+          </div>
+        </div>
+        <div style="position:relative;padding:22px 18px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+          <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:20px;overflow:hidden">
+            <div style="height:110px;background:#DDD url('https://picsum.photos/300/220?random=131') center/cover"></div>
+            <div style="padding:12px"><div style="font:700 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Wet Tarmac, Baner Road</div><div style="font:800 13px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;margin-top:7px">₹16,000</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:20px;overflow:hidden">
+            <div style="height:110px;background:#DDD url('https://picsum.photos/300/220?random=101') center/cover"></div>
+            <div style="padding:12px"><div style="font:700 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Monsoon Serenade</div><div style="font:800 13px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;margin-top:7px">₹3,400</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:20px;overflow:hidden">
+            <div style="height:110px;background:#DDD url('https://picsum.photos/300/220?random=134') center/cover"></div>
+            <div style="padding:12px"><div style="font:700 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Two Umbrellas</div><div style="font:800 13px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;margin-top:7px">₹9,200</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);border-radius:20px;overflow:hidden">
+            <div style="height:110px;background:#DDD url('https://picsum.photos/300/220?random=152') center/cover"></div>
+            <div style="padding:12px"><div style="font:700 12.5px/1.3 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Nine Sittings</div><div style="font:800 13px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;margin-top:7px">₹11,400</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.9);border-radius:30px;padding:24px 26px;box-shadow:0 20px 40px -15px rgba(31,38,135,.07)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#64748B">Heritage layer</div>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Tapestry backdrop</span><span style="width:42px;height:24px;border-radius:20px;background:linear-gradient(135deg,#6366F1,#9333EA);position:relative"><span style="position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff"></span></span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Rangoli medallion</span><span style="width:42px;height:24px;border-radius:20px;background:linear-gradient(135deg,#6366F1,#9333EA);position:relative"><span style="position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff"></span></span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#64748B">Toran divider</span><span style="width:42px;height:24px;border-radius:20px;background:rgba(11,15,25,.14);position:relative"><span style="position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff"></span></span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 12.5px/1 'Plus Jakarta Sans',sans-serif;color:#0B0F19">Jali corners on spotlight</span><span style="width:42px;height:24px;border-radius:20px;background:linear-gradient(135deg,#6366F1,#9333EA);position:relative"><span style="position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff"></span></span></div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#6366F1 0%,#9333EA 100%);border-radius:30px;padding:26px 26px 24px;box-shadow:0 14px 34px -14px rgba(99,102,241,.5)">
+        <div style="font:700 10.5px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.8)">Pro Studio · ₹599 / month</div>
+        <div style="font:800 22px/1.3 'Plus Jakarta Sans',sans-serif;color:#fff;margin-top:12px">Unlock Pink and Teal, plus unlimited live pieces.</div>
+        <div style="font:500 12.5px/1.65 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.9);margin-top:8px">Still 0% commission. The skin is cosmetic — your listings, chats and offers work the same on the free plan.</div>
+        <span style="display:block;font:600 13px/1 'Plus Jakarta Sans',sans-serif;color:#6366F1;background:#fff;padding:15px;border-radius:40px;margin-top:18px;text-align:center">Upgrade to Pro Studio</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;height:44px"></div>
+</div>
+</div>
+
+  </div>
+  <p style="margin:26px 0 0;font:500 12px/1.7 'Plus Jakarta Sans',sans-serif;color:rgba(11,15,25,.5);max-width:88ch">Mobile is drawn for the landing page only (<a href="#1b">1b</a>). Say the word and I'll add 390px versions of discover, listing, dashboard and the editor, plus the chat thread with the advance-payment interstitial. Artwork is photo placeholder — send real pieces and I'll drop them in.</p>
+</section>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,341 @@
+/* ==========================================================================
+   Craftgali — S9, the storefront editor
+   Two columns: the choices on the left, a live preview of the consequence on
+   the right. The preview carries its own data-hue/data-mode, so it never takes
+   the studio's theme — a seller working in the dark studio still sees their
+   light shop.
+   ========================================================================== */
+
+.cg-editor {
+  max-width: var(--cg-wrap);
+  margin: 0 auto;
+  padding: 34px var(--cg-gutter) 0;
+}
+
+.cg-editor__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.cg-editor__title { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; }
+
+.cg-editor__lede {
+  max-width: 64ch;
+  margin-top: 8px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--cg-ink-mut);
+}
+
+.cg-editor__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cg-editor__actions .cg-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+.cg-editor__actions .cg-btn:disabled:hover { transform: none; opacity: 0.5; }
+
+/* Said once, plainly, at the top — not repeated on every control. */
+.cg-editor__pending {
+  margin-bottom: 26px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--cg-ink-mut);
+  background: var(--cg-solid);
+  border: 1px solid var(--cg-edge);
+  border-left: 3px solid var(--cg-hue);
+}
+
+.cg-editor__pending strong { color: var(--cg-ink); }
+
+.cg-editor__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 24px;
+  align-items: start;
+  padding-bottom: 60px;
+}
+
+.cg-editor__left { display: flex; flex-direction: column; gap: 20px; }
+.cg-editor__right { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 108px; }
+
+.cg-editor__sechead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.cg-editor__state { display: flex; align-items: baseline; gap: 12px; }
+
+.cg-editor__note,
+.cg-editor__revert {
+  padding: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+}
+
+.cg-editor__revert { text-decoration: underline; text-underline-offset: 3px; }
+.cg-editor__revert:hover { color: var(--cg-hue); }
+
+/* ------------------------------------------------------------ the hues --- */
+
+.cg-skins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cg-skin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  text-align: left;
+  border-radius: var(--cg-r-panel);
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-skin:hover { transform: translateY(-3px); }
+
+.cg-skin--chosen {
+  border-color: var(--cg-hue);
+  box-shadow: var(--cg-shadow), 0 0 0 1px var(--cg-hue);
+}
+
+/* The swatch is the wordmark rendered in that skin — the honest answer to
+   "what does this look like", rather than a coloured dot. */
+.cg-skin__swatch {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 76px;
+  border-radius: 14px;
+  border: 1px solid var(--cg-edge);
+}
+
+.cg-skin__seam {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--cg-gradient);
+}
+
+.cg-skin__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cg-skin__name { font-size: 13.5px; font-weight: 700; }
+
+.cg-skin__tag {
+  flex: none;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cg-ink-mut);
+  background: var(--cg-edge-soft);
+  border: 1px solid var(--cg-edge);
+  white-space: nowrap;
+}
+
+.cg-skin__tag--pro { color: var(--cg-hue); }
+
+.cg-skin__blurb { font-size: 11.5px; line-height: 1.55; color: var(--cg-ink-mut); }
+
+/* -------------------------------------------------------- the ornament --- */
+
+.cg-layers { padding: 22px 24px 24px; }
+.cg-layers__list { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+.cg-layers .cg-tick { padding: 9px 0; }
+
+/* --------------------------------------------------------- the preview --- */
+
+.cg-editor__preview { padding: 20px 20px 22px; }
+
+.cg-modes {
+  display: flex;
+  gap: 4px;
+  width: fit-content;
+  margin: 4px 0 14px;
+  padding: 4px;
+  background: var(--cg-surface);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-pill);
+}
+
+.cg-preview {
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--cg-r-panel);
+  border: 1px solid var(--cg-edge);
+}
+
+.cg-preview__hero { position: relative; padding: 22px 18px 6px; text-align: center; }
+
+/* The medallion is drawn at hero scale; inside a 360px panel it needs reining
+   in, and it must not push the panel's own height around. */
+.cg-preview__hero .cg-medallion { top: -140px; width: 420px; height: 420px; }
+.cg-preview__hero .cg-jali { width: 46px; height: 46px; }
+.cg-preview__hero .cg-jali--tl { top: 6px; left: 6px; }
+.cg-preview__hero .cg-jali--br { bottom: 6px; right: 6px; }
+.cg-preview .cg-rangoli { margin: 10px 0 4px; }
+.cg-preview .cg-rangoli svg { width: 120px; }
+.cg-preview .cg-toran { padding: 0 0 10px; }
+.cg-preview .cg-toran svg { max-width: 300px; }
+
+.cg-preview__ident {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.cg-preview__face {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cg-solid) center / cover no-repeat;
+  border: 2px solid var(--cg-edge);
+}
+
+.cg-preview__name {
+  font-family: var(--cg-display);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--cg-ink);
+}
+
+.cg-preview__place {
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--cg-hue);
+}
+
+.cg-preview__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.cg-preview__cta {
+  padding: 6px 14px;
+  border-radius: var(--cg-r-pill);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cg-on-hue);
+  background: var(--cg-gradient);
+}
+
+.cg-preview__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px 16px;
+}
+
+.cg-preview__work {
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--cg-card);
+  border: 1px solid var(--cg-edge);
+}
+
+.cg-preview__plate {
+  display: block;
+  height: 82px;
+  background: var(--cg-edge-soft) center / cover no-repeat;
+}
+
+.cg-preview__work figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px 10px;
+}
+
+.cg-preview__title {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--cg-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cg-preview__price { flex: none; font-size: 11px; font-weight: 800; color: var(--cg-ink); }
+
+.cg-preview__work--empty .cg-preview__title,
+.cg-preview__work--empty .cg-preview__price { opacity: 0.45; }
+
+/* ------------------------------------------------------------- upgrade --- */
+
+.cg-pro {
+  padding: 24px 26px;
+  border-radius: var(--cg-r-card);
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  box-shadow: var(--cg-shadow);
+}
+
+/* Only lit when the seller has actually reached for a Pro skin. */
+.cg-pro--wanted { border-color: var(--cg-hue); box-shadow: var(--cg-shadow), 0 0 0 1px var(--cg-hue); }
+
+.cg-pro__title { margin-top: 10px; font-size: 18px; font-weight: 700; }
+
+.cg-pro__body {
+  margin: 8px 0 16px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--cg-ink-mut);
+}
+
+.cg-pro .cg-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+.cg-pro .cg-btn:disabled:hover { transform: none; opacity: 0.5; }
+
+.cg-pro__foot {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--cg-ink-mut);
+}
+
+@media (max-width: 1080px) {
+  .cg-editor__grid { grid-template-columns: 1fr; }
+  .cg-editor__right { position: static; }
+}
+
+@media (max-width: 600px) {
+  .cg-editor__title { font-size: 25px; }
+  .cg-skins { grid-template-columns: 1fr; }
+}

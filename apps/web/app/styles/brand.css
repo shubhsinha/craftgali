@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Craftgali — the wordmark
+   "Craft" in Playfair roman, "Gali" in Playfair italic carrying the live hue.
+   The lockup adds the fingerprint mark, alpha-masked from the logo file so it
+   takes the hue too rather than shipping one PNG per colourway.
+   ========================================================================== */
+
+.cg-wordmark {
+  font-family: var(--cg-display);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--cg-ink);
+}
+
+.cg-wordmark__gali {
+  font-style: italic;
+  color: var(--cg-hue);
+  transition: color 0.4s ease;
+}
+
+/* On the studio's dark chrome the mark is set in paper, and only the italic
+   half keeps the hue — an all-hue wordmark disappears into a dark bar. */
+.cg-wordmark--paper { color: #f8fafc; }
+
+.cg-logotype {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36em;
+}
+
+.cg-logotype__mark {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  background: var(--cg-gradient);
+  -webkit-mask: url(/craftgali-logo.png) center / contain no-repeat;
+  mask: url(/craftgali-logo.png) center / contain no-repeat;
+  transition: background 0.4s ease;
+}
+
+.cg-logotype--paper .cg-logotype__mark { background: #f8fafc; }
+
+.cg-logotype__suffix {
+  font-family: var(--cg-sans);
+  font-size: 0.44em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cg-ink-mut);
+  padding-left: 0.3em;
+  border-left: 1px solid var(--cg-edge);
+  margin-left: 0.1em;
+}
+
+.cg-logotype--paper .cg-logotype__suffix {
+  color: rgba(248, 250, 252, 0.7);
+  border-left-color: rgba(248, 250, 252, 0.24);
+}

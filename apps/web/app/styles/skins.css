@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Craftgali — storefront skins
+   A skin is a hue and a mode, nothing more. Both are the same two attributes
+   the buyer sets on <html>, so a storefront only has to re-declare them on its
+   own wrapper: every --cg-* token below that point resolves to the shop's
+   colourway, and the shell above it is untouched.
+
+   The selectors that do the work live in tokens.css and are deliberately not
+   scoped to :root, which is what makes this nesting possible. All that is left
+   here is the local ground — the fixed layers at the document root still carry
+   the buyer's hue, so a skinned page paints its own.
+   ========================================================================== */
+
+/* Deliberately no min-height: this is used for whole pages *and* for the
+   swatches and live preview inside the editor, which must size to content. The
+   full-page users set their own height. */
+.cg-skinned {
+  position: relative;
+  isolation: isolate;
+  color: var(--cg-ink);
+  background: var(--cg-base);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* The shop's own blurred colour field and craft backdrop, absolute rather than
+   fixed so they belong to the storefront rather than to the viewport. */
+/* Behind everything in the wrapper's own stacking context, which `isolation`
+   above guarantees — so no child needs a z-index of its own, and the sticky
+   chrome inside a studio keeps working. */
+.cg-skinned__ground {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cg-skinned__ground .cg-ambient { position: absolute; }
+
+.cg-skinned__ground .cg-tapestry {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

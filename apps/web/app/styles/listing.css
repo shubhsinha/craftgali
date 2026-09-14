@@ -1,0 +1,330 @@
+/* ==========================================================================
+   Craftgali — P6, the listing
+   The plate and the story on the left, a sticky glass buy rail on the right.
+   The safety notice inside that rail is the only opaque panel on the page —
+   it is the last thing read before money is discussed, so it must not blend in.
+   ========================================================================== */
+
+.cg-listing {
+  max-width: var(--cg-wrap);
+  margin: 0 auto;
+  padding: 26px var(--cg-gutter) 60px;
+}
+
+.cg-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--cg-ink-mut);
+}
+
+.cg-crumbs a:hover { color: var(--cg-hue); }
+.cg-crumbs__here { color: var(--cg-ink); font-weight: 700; }
+
+.cg-listing__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 40px;
+  align-items: start;
+}
+
+.cg-listing__main { min-width: 0; }
+
+/* ---------------------------------------------------------- the plate --- */
+
+.cg-plate {
+  padding: 22px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-plate__mount {
+  overflow: hidden;
+  border-radius: var(--cg-r-panel);
+  background: var(--cg-solid);
+}
+
+.cg-plate__mount img { width: 100%; object-fit: cover; }
+
+.cg-thumbs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.cg-thumb {
+  width: 72px;
+  height: 58px;
+  padding: 0;
+  border-radius: 14px;
+  background: var(--cg-card) center / cover no-repeat;
+  border: 1px solid var(--cg-edge);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.cg-thumb:hover { transform: translateY(-2px); }
+.cg-thumb[aria-pressed="true"] { border-color: var(--cg-hue); border-width: 2px; }
+
+.cg-thumb--film,
+.cg-thumb--wall {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cg-ink);
+  background: var(--cg-card);
+}
+
+.cg-thumb--film:hover,
+.cg-thumb--wall:hover { color: var(--cg-hue); border-color: var(--cg-hue); }
+
+/* ---------------------------------------------------------- the story --- */
+
+.cg-story {
+  margin-top: 30px;
+  padding: 32px 34px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-story .cg-eyebrow { margin-bottom: 16px; color: var(--cg-hue); }
+
+/* The maker's own words, set in the serif — the one place on a shell page
+   where the artist's voice is typographically distinct from Craftgali's. */
+.cg-story__para {
+  font-family: var(--cg-display);
+  font-size: 16.5px;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.cg-story__para:last-of-type { margin-bottom: 0; }
+
+.cg-spec {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--cg-edge-soft);
+}
+
+.cg-spec__cell dt {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--cg-ink-mut);
+}
+
+.cg-spec__cell dd { margin-top: 5px; font-size: 17px; font-weight: 700; }
+
+/* -------------------------------------------------------- the buy rail --- */
+
+.cg-listing__side {
+  position: sticky;
+  top: 108px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cg-listing__side .cg-panel { padding: 26px; }
+.cg-panel--stacked { padding: 22px 24px; }
+
+.cg-listing__title { font-size: 27px; font-weight: 800; line-height: 1.2; }
+
+.cg-listing__spec { margin-top: 8px; font-size: 13px; color: var(--cg-ink-mut); }
+
+.cg-listing__price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--cg-edge-soft);
+  border-bottom: 1px solid var(--cg-edge-soft);
+}
+
+.cg-listing__figure {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--cg-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cg-listing__keeps {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: right;
+  color: var(--cg-ink-mut);
+}
+
+.cg-listing__actions { display: flex; flex-direction: column; gap: 10px; }
+.cg-listing__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cg-listing__notice { margin-top: 18px; }
+
+/* --------------------------------------------------------- the handover --- */
+
+.cg-handover { display: flex; flex-direction: column; gap: 16px; margin-top: 14px; }
+
+.cg-handover__row { display: flex; gap: 12px; }
+
+.cg-handover__dot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--cg-gradient);
+}
+
+.cg-handover__title { font-size: 13.5px; font-weight: 700; }
+.cg-handover__note { margin-top: 3px; font-size: 12.5px; line-height: 1.55; color: var(--cg-ink-mut); }
+
+/* ----------------------------------------------------------- the maker --- */
+
+.cg-maker__head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+
+.cg-maker__face {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cg-solid) center / cover no-repeat;
+  border: 2px solid var(--cg-edge);
+}
+
+.cg-maker__name { font-size: 16px; font-weight: 700; }
+.cg-maker__meta { margin-top: 2px; font-size: 12px; color: var(--cg-ink-mut); }
+
+.cg-maker__badges { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.cg-maker__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 18px 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--cg-edge-soft);
+  border-bottom: 1px solid var(--cg-edge-soft);
+  text-align: center;
+}
+
+.cg-maker__figure { font-size: 19px; font-weight: 800; }
+.cg-maker__label { margin-top: 3px; font-size: 11px; color: var(--cg-ink-mut); }
+
+.cg-maker__link { font-size: 13px; font-weight: 600; color: var(--cg-hue); }
+
+/* --------------------------------------------------------- more by them --- */
+
+.cg-alsoby { margin-top: 56px; }
+
+.cg-alsoby__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  align-items: start;
+  gap: 24px;
+}
+
+@media (max-width: 1080px) {
+  .cg-listing__grid { grid-template-columns: 1fr; gap: 26px; }
+  .cg-listing__side { position: static; }
+}
+
+@media (max-width: 720px) {
+  .cg-story { padding: 22px; }
+  .cg-listing__title { font-size: 22px; }
+  .cg-listing__figure { font-size: 26px; }
+}
+
+/* --------------------------------------------------------- the reviews --- */
+
+.cg-reviews {
+  margin-top: 30px;
+  padding: 30px 34px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-reviews__list { display: flex; flex-direction: column; gap: 22px; margin-top: 18px; }
+
+.cg-review + .cg-review,
+.cg-reviews__list li + li { padding-top: 22px; border-top: 1px solid var(--cg-edge-soft); }
+
+.cg-review__stars,
+.cg-front__reviewstars { font-size: 14px; letter-spacing: 2px; color: var(--cg-hue); }
+.cg-review__dim { opacity: 0.25; }
+
+.cg-review__body {
+  margin-top: 8px;
+  font-family: var(--cg-display);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cg-review__by { margin-top: 8px; font-size: 12px; color: var(--cg-ink-mut); }
+
+/* ----------------------------------------------------- leaving a review --- */
+
+.cg-reviewform { border-left: 3px solid var(--cg-hue); }
+
+.cg-reviewform__lead {
+  margin: 8px 0 16px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--cg-ink-mut);
+}
+
+.cg-reviewform textarea {
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--cg-ink);
+  background: var(--cg-solid);
+  border: 1px solid var(--cg-edge);
+  outline: none;
+  resize: vertical;
+}
+
+.cg-reviewform textarea:focus { border-color: var(--cg-hue); }
+
+.cg-stars { display: flex; gap: 2px; }
+
+.cg-star {
+  padding: 2px 4px;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--cg-edge);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+[data-mode="dark"] .cg-star { color: rgba(255, 255, 255, 0.22); }
+.cg-star:hover { transform: scale(1.12); }
+.cg-star--on { color: var(--cg-hue); }

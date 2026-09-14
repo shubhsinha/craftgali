@@ -1,0 +1,308 @@
+/* ==========================================================================
+   Craftgali — P8, the storefront
+   One layout, four colourways. Every rule below reads --cg-* tokens that the
+   page's own `data-hue` / `data-mode` wrapper has already re-resolved, so a
+   skin change is a repaint and never a reflow.
+   ========================================================================== */
+
+.cg-front {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.cg-front__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px var(--cg-gutter);
+  border-bottom: 1px solid var(--cg-edge-soft);
+}
+
+.cg-front__url {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cg-ink-mut);
+}
+
+/* --------------------------------------------------------------- hero --- */
+
+.cg-front__hero {
+  position: relative;
+  margin: 22px var(--cg-gutter) 0;
+  overflow: hidden;
+  border-radius: 36px;
+  border: 1px solid var(--cg-edge);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-front__cover {
+  height: 320px;
+  background: center / cover no-repeat;
+}
+
+/* The cover is a photograph the artist chose; the wash is what makes the name
+   legible on top of it whatever they chose. */
+.cg-front__wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--cg-hue) 22%, transparent) 0%,
+    transparent 38%,
+    color-mix(in srgb, var(--cg-base) 88%, transparent) 100%
+  );
+}
+
+.cg-front__over {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin: -76px 26px 0;
+  padding: 26px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-front__face {
+  width: 92px;
+  height: 92px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cg-solid) center / cover no-repeat;
+  border: 3px solid var(--cg-edge);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-front__ident { flex: 1; min-width: 200px; }
+
+.cg-front__place {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cg-hue);
+}
+
+.cg-front__name {
+  margin: 6px 0 12px;
+  font-family: var(--cg-display);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.cg-front__badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.cg-front__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ------------------------------------------------------------- the shop --- */
+
+.cg-front__quote {
+  max-width: 720px;
+  margin: 34px auto 0;
+  padding: 0 var(--cg-gutter);
+  font-family: var(--cg-display);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.cg-front__blurb {
+  max-width: 640px;
+  margin: 14px auto 0;
+  padding: 0 var(--cg-gutter);
+  font-size: 14.5px;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--cg-ink-mut);
+}
+
+.cg-front__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 720px;
+  margin: 30px auto 0;
+  padding: 20px 26px;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-panel);
+}
+
+.cg-front__stat { text-align: center; }
+
+.cg-front__figure {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.1;
+  background: var(--cg-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cg-front__statlabel {
+  margin-top: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+}
+
+.cg-front__tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: fit-content;
+  max-width: calc(100% - 2 * var(--cg-gutter));
+  margin: 30px auto 0;
+  padding: 6px;
+  background: var(--cg-surface);
+  backdrop-filter: var(--cg-blur-light);
+  -webkit-backdrop-filter: var(--cg-blur-light);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-pill);
+}
+
+.cg-front__empty {
+  max-width: 46ch;
+  margin: 40px auto;
+  text-align: center;
+  color: var(--cg-ink-mut);
+}
+
+.cg-front__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  /* Each piece keeps its own proportions, so a card is as tall as its work is —
+     stretching them to a shared row height would put dead glass under the short
+     ones. */
+  align-items: start;
+  gap: 26px;
+  max-width: var(--cg-wrap);
+  margin: 34px auto 0;
+  padding: 0 var(--cg-gutter);
+}
+
+/* --------------------------------------------------------------- a work --- */
+
+.cg-work {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.cg-work:hover { transform: translateY(-6px); border-color: var(--cg-hue); }
+
+.cg-work__mount { position: relative; display: block; }
+.cg-work__mount img { width: 100%; object-fit: cover; }
+
+.cg-work--sold .cg-work__mount img { filter: saturate(0.35); opacity: 0.75; }
+
+.cg-work__sold {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(11, 15, 25, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cg-work__body { display: flex; flex-direction: column; gap: 5px; padding: 18px 20px 20px; }
+.cg-work__title { font-size: 15.5px; font-weight: 700; }
+.cg-work__title:hover { color: var(--cg-hue); }
+.cg-work__meta { font-size: 12px; color: var(--cg-ink-mut); }
+.cg-work__price { margin-top: 6px; font-size: 17px; font-weight: 800; }
+
+/* ------------------------------------------------------------- the foot --- */
+
+.cg-front__thread {
+  max-width: var(--cg-wrap);
+  margin: 54px auto 0;
+  border: none;
+  border-top: 1px solid var(--cg-edge);
+}
+
+.cg-front__foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: var(--cg-wrap);
+  margin: 0 auto;
+  padding: 36px var(--cg-gutter) 0;
+}
+
+.cg-front__label {
+  margin-bottom: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cg-ink-mut);
+}
+
+.cg-front__reviewbody {
+  font-family: var(--cg-display);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.cg-front__reviewby { margin-top: 10px; font-size: 12.5px; color: var(--cg-ink-mut); }
+
+.cg-front__wall { margin-bottom: 10px; font-size: 13.5px; line-height: 1.6; }
+.cg-front__wallwhen { color: var(--cg-ink-mut); }
+
+.cg-front__ask {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cg-hue);
+}
+
+.cg-front__skin {
+  margin-top: 44px;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cg-ink-mut);
+}
+
+@media (max-width: 900px) {
+  .cg-front__hero { margin: 14px 12px 0; border-radius: 24px; }
+  .cg-front__cover { height: 200px; }
+  .cg-front__over { margin: -60px 12px 0; padding: 18px; }
+  .cg-front__name { font-size: 27px; }
+  .cg-front__stats { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .cg-front__grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+  .cg-front__foot { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.cg-front__reviews { display: flex; flex-direction: column; gap: 20px; }
+.cg-front__reviews li + li { padding-top: 20px; border-top: 1px solid var(--cg-edge-soft); }
+.cg-front__reviews .cg-front__reviewbody { margin-top: 6px; font-size: 17px; }

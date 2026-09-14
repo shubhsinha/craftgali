@@ -1,0 +1,354 @@
+/* ==========================================================================
+   Craftgali — the chrome
+   Both headers are the same floating glass bar: it detaches from the viewport
+   edge, sticks 20px down, and blurs whatever scrolls under it.
+   ========================================================================== */
+
+.cg-header,
+.cg-appbar {
+  position: sticky;
+  top: 20px;
+  z-index: 100;
+  margin: 20px var(--cg-gutter) 0;
+}
+
+.cg-header__row,
+.cg-appbar__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: var(--cg-wrap);
+  margin: 0 auto;
+  padding: 14px 32px;
+  background: var(--cg-surface);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-bar);
+  box-shadow: var(--cg-shadow);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.cg-header__lead,
+.cg-appbar__actions,
+.cg-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cg-header__lead { gap: 32px; }
+
+.cg-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+}
+
+.cg-nav a:hover { color: var(--cg-hue); }
+
+.cg-header__signin,
+.cg-appbar__link {
+  padding: 10px 18px;
+  border-radius: var(--cg-r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cg-ink);
+  background: var(--cg-card);
+  border: 1px solid var(--cg-edge);
+  white-space: nowrap;
+}
+
+.cg-header__signin:hover,
+.cg-appbar__link:hover { background: var(--cg-edge); transform: translateY(-2px); }
+
+/* ------------------------------------------------- the theme controls --- */
+
+.cg-theme {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cg-hues {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--cg-card);
+  border: 1px solid var(--cg-edge);
+  border-radius: 30px;
+}
+
+.cg-hue {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.cg-hue:hover { transform: scale(1.15); }
+.cg-hue[aria-pressed="true"] { border-color: var(--cg-ink); transform: scale(1.15); }
+
+.cg-modetoggle {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  border-radius: 50%;
+  color: var(--cg-ink);
+  background: var(--cg-card);
+  border: 1px solid var(--cg-edge);
+}
+
+.cg-modetoggle:hover { background: var(--cg-edge); transform: translateY(-2px); }
+
+.cg-theme--compact .cg-hues { padding: 4px 8px; gap: 5px; }
+.cg-theme--compact .cg-hue { width: 13px; height: 13px; }
+.cg-theme--compact .cg-modetoggle { width: 32px; height: 32px; font-size: 12px; }
+
+.cg-header__divider { display: flex; align-items: center; }
+
+/* ----------------------------------------------------- the search combo --- */
+
+.cg-search {
+  flex: 1;
+  min-width: 0;
+  max-width: 620px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 8px 7px 18px;
+  background: var(--cg-card);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-pill);
+  transition: border-color 0.35s ease;
+}
+
+.cg-search:focus-within { border-color: var(--cg-hue); }
+
+.cg-search__place {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 0 14px 0 0;
+  border-right: 1px solid var(--cg-edge-soft);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+  white-space: nowrap;
+}
+
+.cg-search__place:hover { color: var(--cg-hue); }
+
+.cg-search__field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cg-ink-mut);
+}
+
+.cg-search__field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--cg-ink);
+}
+
+.cg-search__field input::placeholder { color: var(--cg-ink-mut); opacity: 0.7; }
+
+.cg-avatar {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--cg-gradient);
+  display: block;
+}
+
+.cg-avatar span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--cg-card) center / cover no-repeat;
+}
+
+/* ------------------------------------------------------------ mobile nav --- */
+
+.cg-mobilenav { position: relative; }
+
+.cg-mobilenav__toggle {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--cg-ink);
+  background: var(--cg-card);
+  border: 1px solid var(--cg-edge);
+}
+
+.cg-mobilenav__panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  background: var(--cg-surface);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-panel);
+  box-shadow: var(--cg-shadow-lift);
+}
+
+.cg-mobilenav__panel a {
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.cg-mobilenav__panel a:hover { background: var(--cg-edge-soft); color: var(--cg-hue); }
+
+.cg-mobilenav__hues {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--cg-edge-soft);
+}
+
+/* --------------------------------------------------------- the tab bar --- */
+
+.cg-tabbar {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 8px;
+  background: var(--cg-surface);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: 24px;
+  box-shadow: var(--cg-shadow-lift);
+}
+
+.cg-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 2px;
+  border-radius: 16px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+}
+
+.cg-tab__icon { display: flex; }
+
+.cg-tab[aria-current="page"] { color: var(--cg-hue); background: var(--cg-edge-soft); }
+
+/* The tab bar covers the last rows of a feed, so the app shell makes room. */
+@media (max-width: 1080px) {
+  .cg-app { padding-bottom: 84px; }
+}
+
+/* ------------------------------------------------------------- footer --- */
+
+.cg-footer {
+  position: relative;
+  margin-top: 80px;
+  padding: 44px 0 40px;
+  background: var(--cg-surface);
+  backdrop-filter: var(--cg-blur-light);
+  -webkit-backdrop-filter: var(--cg-blur-light);
+  border-top: 1px solid var(--cg-edge);
+}
+
+.cg-footer__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
+  padding-bottom: 34px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--cg-edge-soft);
+}
+
+.cg-stat__figure {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--cg-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cg-stat__label {
+  margin: 8px 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cg-ink);
+}
+
+.cg-stat__body { font-size: 12.5px; line-height: 1.65; color: var(--cg-ink-mut); }
+
+.cg-footer__base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cg-ink-mut);
+}
+
+.cg-footer__tag {
+  font-family: var(--cg-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--cg-ink);
+}
+
+.cg-footer__links { display: flex; gap: 20px; flex-wrap: wrap; }
+.cg-footer__links a:hover { color: var(--cg-hue); }
+
+@media (max-width: 900px) {
+  .cg-header, .cg-appbar { top: 10px; margin: 10px 8px 0; }
+  .cg-header__row, .cg-appbar__row { padding: 10px 14px; }
+  .cg-footer__stats { grid-template-columns: 1fr; gap: 22px; }
+  .cg-footer__base { flex-direction: column; text-align: center; }
+}

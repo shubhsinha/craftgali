@@ -1,0 +1,377 @@
+/* ==========================================================================
+   Craftgali — base
+   The ground, the two ornament layers that sit on it, and the handful of
+   primitives (buttons, chips, badges, notices) every page is assembled from.
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--cg-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--cg-ink);
+  background: var(--cg-base);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, dl, dd, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--cg-hue); }
+
+img { max-width: 100%; display: block; }
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+input, select, textarea { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--cg-hue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------ the two grounds --- */
+
+/* The blurred colour fields. Fixed, so they don't scroll off a long feed. */
+.cg-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: var(--cg-glow-opacity);
+  transition: opacity 0.4s ease, background 0.4s ease;
+}
+
+.cg-glow--1 { top: -100px; left: -100px; width: 700px; height: 700px; background: var(--cg-glow-1); }
+.cg-glow--2 { top: 200px; right: -150px; width: 750px; height: 750px; background: var(--cg-glow-2); }
+.cg-glow--3 { bottom: 50px; left: 15%; width: 600px; height: 600px; background: var(--cg-glow-3); }
+
+/* The woven craft backdrop, tinted with the live hue mixed into gold. */
+.cg-tapestry {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--cg-motif-opacity);
+  color: var(--cg-motif);
+  transition: color 0.4s ease, opacity 0.4s ease;
+}
+
+/* Everything the reader touches floats above both layers. */
+.cg-wrap,
+header, main, footer, nav { position: relative; z-index: 1; }
+
+.cg-wrap {
+  max-width: var(--cg-wrap);
+  margin: 0 auto;
+  padding: 0 var(--cg-gutter);
+}
+
+/* ------------------------------------------------------------ ornament --- */
+
+.cg-medallion {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  width: 640px;
+  height: 640px;
+  max-width: 140vw;
+  z-index: 0;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--cg-hue) 65%, var(--cg-gold) 35%);
+  opacity: var(--cg-medallion-opacity);
+  transform-origin: center;
+  animation: cg-spin 90s linear infinite;
+  transition: color 0.4s ease, opacity 0.4s ease;
+}
+
+@keyframes cg-spin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(360deg); }
+}
+
+.cg-rangoli {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0 40px;
+  opacity: 0.85;
+  color: color-mix(in srgb, var(--cg-hue) 60%, var(--cg-gold) 40%);
+  transition: color 0.4s ease;
+}
+
+.cg-toran {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0 34px;
+  opacity: 0.9;
+  color: color-mix(in srgb, var(--cg-hue) 58%, var(--cg-gold) 42%);
+  transition: color 0.4s ease;
+}
+
+.cg-toran svg { width: 100%; max-width: 900px; height: auto; }
+
+.cg-jali {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--cg-hue) 62%, var(--cg-gold) 38%);
+  opacity: 0.78;
+  animation: cg-glimmer 5s ease-in-out infinite;
+  transition: color 0.4s ease;
+}
+
+.cg-jali--tl { top: 14px; left: 14px; }
+.cg-jali--br { bottom: 14px; right: 14px; transform: rotate(180deg); animation-delay: 1.6s; }
+
+@keyframes cg-glimmer {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 0.95; }
+}
+
+.cg-chakra {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 84px;
+  height: 84px;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--cg-hue) 70%, var(--cg-gold) 30%);
+  opacity: 0.28;
+  transition: color 0.4s ease;
+}
+
+[data-mode="dark"] .cg-chakra { opacity: 0.22; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cg-medallion, .cg-jali { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .cg-chakra { display: none; }
+}
+
+/* ---------------------------------------------------------- primitives --- */
+
+/* Glass is one recipe, spent three ways: chrome, card, and the lifted panel. */
+.cg-glass,
+.cg-panel,
+.cg-card {
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  border-radius: var(--cg-r-card);
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-panel { border-radius: var(--cg-r-panel); }
+
+.cg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: var(--cg-r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cg-btn--solid {
+  background: var(--cg-gradient);
+  color: var(--cg-on-hue);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cg-btn--solid:hover { opacity: 0.95; transform: translateY(-2px); color: var(--cg-on-hue); }
+
+.cg-btn--outline,
+.cg-btn--quiet {
+  background: var(--cg-card);
+  color: var(--cg-ink);
+  border: 1px solid var(--cg-edge);
+  backdrop-filter: var(--cg-blur-light);
+  -webkit-backdrop-filter: var(--cg-blur-light);
+  /* The white rim is the system's, but on a light glass panel white-on-white
+     leaves no edge at all — this hairline is what keeps it reading as a
+     control, and it inverts on its own in dark mode. */
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cg-ink) 8%, transparent);
+}
+
+.cg-btn--outline:hover,
+.cg-btn--quiet:hover {
+  background: var(--cg-edge);
+  color: var(--cg-ink);
+  transform: translateY(-2px);
+}
+
+.cg-btn--quiet { font-weight: 500; color: var(--cg-ink-mut); }
+
+.cg-btn--sm    { padding: 8px 16px; font-size: 12px; }
+.cg-btn--block { width: 100%; }
+
+/* A pressable pill: the filter chips, the sort row, the storefront tabs. */
+.cg-chip {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.cg-chip:hover { color: var(--cg-ink); background: var(--cg-edge-soft); }
+
+.cg-chip[aria-pressed="true"] {
+  background: var(--cg-edge);
+  border-color: var(--cg-edge);
+  color: var(--cg-hue);
+}
+
+.cg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+  background: var(--cg-edge-soft);
+  border: 1px solid var(--cg-edge);
+}
+
+.cg-badge--solid {
+  background: var(--cg-gradient);
+  border-color: transparent;
+  color: var(--cg-on-hue);
+}
+
+.cg-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cg-ink-mut);
+}
+
+.cg-eyebrow--accent { color: var(--cg-hue); }
+
+.cg-lede {
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--cg-ink);
+  opacity: 0.82;
+}
+
+.cg-muted { color: var(--cg-ink-mut); }
+
+/**
+ * The safety notice. Deliberately the one surface in the system that is NOT
+ * glass — it must not read as another card the eye can slide past, so it sits
+ * opaque and hue-edged wherever money is about to change hands.
+ */
+.cg-notice {
+  background: var(--cg-solid);
+  border: 1px solid var(--cg-edge);
+  border-left: 3px solid var(--cg-hue);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.cg-notice__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cg-ink);
+  margin-bottom: 4px;
+}
+
+.cg-notice__body {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--cg-ink-mut);
+}
+
+/* Section headers — used on the landing, the listing and the storefront. */
+.cg-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.cg-section__title { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+
+.cg-section__more {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cg-hue);
+}
+
+.cg-thread {
+  border: none;
+  border-top: 1px solid var(--cg-edge);
+  margin: 0;
+}
+
+/* ----------------------------------------------------------- utilities --- */
+
+.cg-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cg-show-md { display: none !important; }
+
+@media (max-width: 1080px) {
+  .cg-hide-md { display: none !important; }
+  .cg-show-md { display: flex !important; }
+}
+
+@media (max-width: 720px) {
+  .cg-hide-sm { display: none !important; }
+}
