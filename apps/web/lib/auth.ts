@@ -60,6 +60,24 @@ export async function verifyPassword(password: string, stored: string | null) {
 
 /* -------------------------------------------------------------- sessions --- */
 
+/**
+ * Whether the session cookie may carry `Secure`.
+ *
+ * A browser silently refuses to store a Secure cookie sent over plain HTTP, so
+ * keying this off NODE_ENV alone breaks sign-in on any http:// deployment: the
+ * action succeeds, the redirect happens, and the session never arrives — which
+ * looks like a wrong password rather than a missing certificate.
+ *
+ * Keying it off the origin we are actually served from gets both right. A real
+ * https:// domain becomes Secure on its own, and an http:// host (a Coolify
+ * sslip.io address, say) still works until a certificate is in front of it.
+ */
+function cookieIsSecure() {
+  const origin = process.env.SITE_ORIGIN;
+  if (origin) return origin.startsWith("https://");
+  return process.env.NODE_ENV === "production";
+}
+
 function secret() {
   const value = process.env.AUTH_SECRET;
   if (!value) throw new Error("AUTH_SECRET is not set — copy .env.example to .env.local.");
@@ -89,7 +107,7 @@ export async function startSession(userId: string) {
   cookies().set(SESSION_COOKIE, token, {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: cookieIsSecure(),
     path: "/",
     maxAge: SESSION_DAYS * 24 * 60 * 60,
   });
