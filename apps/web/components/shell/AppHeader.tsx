@@ -3,6 +3,7 @@ import { Logotype } from "@/components/brand/Wordmark";
 import { currentUser } from "@/lib/auth";
 import { readPlace } from "@/lib/place";
 import { CityPicker } from "./CityPicker";
+import { unreadCount } from "@/lib/messages";
 import { AccountMenu } from "./AccountMenu";
 import { SearchField } from "./SearchField";
 import { ThemeControls } from "./ThemeControls";
@@ -15,6 +16,7 @@ import { ThemeControls } from "./ThemeControls";
 export async function AppHeader() {
   const user = await currentUser();
   const place = readPlace();
+  const unread = user ? await unreadCount(user.id) : 0;
 
   return (
     <header className="cg-appbar">
@@ -31,7 +33,7 @@ export async function AppHeader() {
           <div className="cg-hide-md">
             <ThemeControls compact />
           </div>
-          <AccountMenu user={user} />
+          <AccountMenu user={user} unread={unread} />
         </div>
       </div>
     </header>

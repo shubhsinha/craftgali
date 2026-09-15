@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Craftgali — messages
+   The inbox, and a thread. The safety notice is the first thing in every
+   thread and it is opaque, like every other place money is about to be
+   discussed.
+   ========================================================================== */
+
+.cg-inbox, .cg-chat { max-width: 820px; margin: 0 auto; padding: 30px var(--cg-gutter) 60px; }
+.cg-inbox__head { margin-bottom: 20px; }
+.cg-inbox__list { display: flex; flex-direction: column; gap: 10px; }
+
+.cg-thread {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "who badge" "subject badge" "last badge";
+  gap: 2px 14px;
+  padding: 14px 18px;
+  border-radius: var(--cg-r-panel);
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  box-shadow: var(--cg-shadow);
+}
+.cg-thread:hover { border-color: var(--cg-hue); }
+.cg-thread--unread { border-left: 3px solid var(--cg-hue); }
+.cg-thread__who { grid-area: who; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.cg-thread__role { padding: 1px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cg-ink-mut); background: var(--cg-edge-soft); }
+.cg-thread__subject { grid-area: subject; font-size: 12px; color: var(--cg-hue); font-weight: 600; }
+.cg-thread__last { grid-area: last; font-size: 13px; color: var(--cg-ink-mut); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cg-thread__badge { grid-area: badge; align-self: center; }
+.cg-thread__badge, .cg-unread {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 20px; padding: 0 6px; border-radius: 20px;
+  font-size: 11px; font-weight: 800; color: var(--cg-on-hue); background: var(--cg-gradient);
+}
+.cg-unread { margin-left: 7px; }
+.cg-unread--tab { position: absolute; top: -4px; right: -10px; margin: 0; min-width: 16px; height: 16px; font-size: 9.5px; }
+.cg-tab__icon { position: relative; }
+
+.cg-inbox__empty { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; color: var(--cg-ink-mut); }
+
+/* ------------------------------------------------------------- a thread --- */
+
+.cg-chat__head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+.cg-chat__back { font-size: 13px; font-weight: 600; color: var(--cg-ink-mut); padding-top: 4px; white-space: nowrap; }
+.cg-chat__who { font-size: 22px; font-weight: 800; }
+.cg-chat__who a:hover { color: var(--cg-hue); }
+.cg-chat__subject { margin-top: 2px; font-size: 13px; color: var(--cg-ink-mut); }
+.cg-chat__subject a { color: var(--cg-hue); font-weight: 600; }
+
+.cg-chat__body {
+  display: flex; flex-direction: column;
+  border-radius: var(--cg-r-card);
+  background: var(--cg-card);
+  backdrop-filter: var(--cg-blur);
+  -webkit-backdrop-filter: var(--cg-blur);
+  border: 1px solid var(--cg-edge);
+  box-shadow: var(--cg-shadow);
+  overflow: hidden;
+}
+.cg-chat__notice { margin: 16px; }
+
+.cg-chat__log {
+  display: flex; flex-direction: column; gap: 8px;
+  min-height: 260px; max-height: 58vh; overflow-y: auto;
+  padding: 4px 16px 16px;
+}
+
+.cg-msg { max-width: 76%; align-self: flex-start; display: flex; flex-direction: column; gap: 4px; }
+.cg-msg--mine { align-self: flex-end; align-items: flex-end; }
+.cg-msg__body {
+  padding: 10px 14px; border-radius: 18px 18px 18px 6px;
+  font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word;
+  background: var(--cg-solid); border: 1px solid var(--cg-edge);
+}
+.cg-msg--mine .cg-msg__body { border-radius: 18px 18px 6px 18px; color: var(--cg-on-hue); background: var(--cg-gradient); border-color: transparent; }
+.cg-msg--sending { opacity: .6; }
+.cg-msg__time { font-size: 10.5px; color: var(--cg-ink-mut); padding: 0 6px; }
+.cg-msg__flag {
+  max-width: 100%; padding: 8px 12px; border-radius: 12px;
+  font-size: 12px; font-weight: 600; line-height: 1.5;
+  color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca;
+}
+[data-mode="dark"] .cg-msg__flag { color: #fecaca; background: rgba(127,29,29,.35); border-color: rgba(248,113,113,.4); }
+
+.cg-chat__composer {
+  display: flex; gap: 10px; align-items: flex-end;
+  padding: 12px 16px; border-top: 1px solid var(--cg-edge-soft);
+}
+.cg-chat__composer textarea {
+  flex: 1; padding: 10px 14px; border-radius: 16px; resize: none;
+  font-size: 14px; line-height: 1.5; color: var(--cg-ink);
+  background: var(--cg-solid); border: 1px solid var(--cg-edge); outline: none;
+}
+.cg-chat__composer textarea:focus { border-color: var(--cg-hue); }
+.cg-chat__composer .cg-btn { padding: 11px 22px; }
+
+.cg-chat__status { padding: 6px 16px 10px; font-size: 11px; font-weight: 600; color: var(--cg-ink-mut); }
+.cg-chat__status--live::before { content: "●"; color: #16a34a; margin-right: 6px; }
+.cg-chat__status--reconnecting::before { content: "●"; color: #d97706; margin-right: 6px; }
+
+@media (max-width: 720px) {
+  .cg-msg { max-width: 88%; }
+  .cg-chat__log { max-height: 52vh; }
+}

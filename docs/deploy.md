@@ -27,6 +27,7 @@ from the image, so nothing is inherited from a developer's machine.
 | `RESEND_API_KEY` | for reset | Without it, reset links are written to the container log instead of sent. |
 | `MAIL_FROM` | for reset | e.g. `CraftGali <no-reply@your-domain>` |
 | `SERVER_ACTION_ORIGINS` | only if needed | See below. |
+| `DATABASE_URL_DIRECT` | only if not Neon | Chat uses Postgres `LISTEN/NOTIFY`, which PgBouncer's transaction mode silently drops. By default the app derives the direct endpoint by removing `-pooler` from `DATABASE_URL`, which is Neon's convention. Any other host sets this explicitly. |
 
 None of these are needed at build time, and none should be build arguments —
 a build-time secret is baked into the image.

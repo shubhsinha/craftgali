@@ -80,3 +80,20 @@ export async function transaction<T>(
     client.release();
   }
 }
+
+/**
+ * A connection string that supports LISTEN/NOTIFY.
+ *
+ * The pooler endpoint is PgBouncer in transaction mode, which silently drops
+ * NOTIFY — a LISTEN on it succeeds and then never hears anything. The chat
+ * broker needs a session it holds open, so it goes to the direct endpoint.
+ * Neon names it the same host without `-pooler`; anything else sets
+ * DATABASE_URL_DIRECT explicitly.
+ */
+export function directConnectionString() {
+  const explicit = process.env.DATABASE_URL_DIRECT;
+  if (explicit) return explicit;
+  const pooled = process.env.DATABASE_URL;
+  if (!pooled) throw new Error("DATABASE_URL is not set.");
+  return pooled.replace("-pooler.", ".");
+}

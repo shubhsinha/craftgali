@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { rupees } from "@/components/marketplace/PieceCard";
 import { placeholder } from "@/lib/media";
 import { DASHBOARD, pieceById } from "@/lib/sample-data";
@@ -28,9 +29,9 @@ export function StudioDashboard({ name, handle }: { name: string; handle: string
             {nudge.lead} <em>{nudge.piece}</em> {nudge.tail}
           </p>
           <p className="cg-nudge__body">{nudge.body}</p>
-          <button type="button" className="cg-nudge__action">
+          <Link href="/messages" className="cg-nudge__action">
             {nudge.action}
-          </button>
+          </Link>
         </section>
 
         <section className="cg-card">

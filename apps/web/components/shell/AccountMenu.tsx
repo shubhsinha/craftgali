@@ -7,7 +7,7 @@ import type { SessionUser } from "@/lib/auth";
  * The right-hand end of the app header. A visitor gets a way in; a signed-in
  * buyer gets their own rows, and a seller's "My studio" points at their shop.
  */
-export function AccountMenu({ user }: { user: SessionUser | null }) {
+export function AccountMenu({ user, unread = 0 }: { user: SessionUser | null; unread?: number }) {
   if (!user) {
     return (
       <div className="cg-appbar__actions">
@@ -28,6 +28,7 @@ export function AccountMenu({ user }: { user: SessionUser | null }) {
       </Link>
       <Link href="/messages" className="cg-appbar__link cg-hide-md">
         Messages
+        {unread ? <span className="cg-unread">{unread}</span> : null}
       </Link>
 
       <Link

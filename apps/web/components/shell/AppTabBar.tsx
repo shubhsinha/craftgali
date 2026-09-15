@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChatIcon, GridIcon, HeartIcon, SearchIcon, StudioIcon } from "./icons";
 
 /** Phone-only bottom rail. Off-screen above 1080px, where the header carries it. */
-export function AppTabBar({ studioHref }: { studioHref: string }) {
+export function AppTabBar({ studioHref, unread = 0 }: { studioHref: string; unread?: number }) {
   const pathname = usePathname();
 
   const TABS = [
@@ -30,6 +30,7 @@ export function AppTabBar({ studioHref }: { studioHref: string }) {
           >
             <span className="cg-tab__icon">
               <Icon size={19} />
+              {href === "/messages" && unread ? <span className="cg-unread cg-unread--tab">{unread}</span> : null}
             </span>
             {label}
           </Link>

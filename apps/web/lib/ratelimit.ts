@@ -39,6 +39,8 @@ export const LIMITS = {
   shopDetails: { max: 30, windowSec: 60 * 60 },
   shopMedia: { max: 20, windowSec: 60 * 60 },
   publishSkin: { max: 30, windowSec: 60 * 60 },
+  sendMessage: { max: 120, windowSec: 60 * 60 },
+  startThread: { max: 30, windowSec: 60 * 60 },
 } satisfies Record<string, Limit>;
 
 /**

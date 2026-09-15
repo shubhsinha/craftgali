@@ -12,6 +12,7 @@ import "./styles/studio.css";
 import "./styles/editor.css";
 import "./styles/compose.css";
 import "./styles/place.css";
+import "./styles/messages.css";
 import "./styles/auth.css";
 import "./styles/skins.css";
 import "./styles/storefront.css";
