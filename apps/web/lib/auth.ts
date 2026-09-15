@@ -1,5 +1,7 @@
 import "server-only";
 
+import { cache } from "react";
+
 import { createHash, randomBytes, scrypt as scryptCb, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 import { cookies } from "next/headers";
@@ -121,7 +123,15 @@ export function endSession() {
  * The signed-in user, or null. Reads the row every time rather than trusting
  * claims in the cookie, so a role change or a deletion takes effect at once.
  */
-export async function currentUser(): Promise<SessionUser | null> {
+/**
+ * Memoised for the length of one request.
+ *
+ * The header, the layout and the page all ask who is signed in, and without
+ * this each one is a separate round-trip to Postgres for the same row. React's
+ * `cache` dedupes them inside a single render, which is exactly the scope a
+ * session check should have: fresh on every request, once per request.
+ */
+export const currentUser = cache(async (): Promise<SessionUser | null> => {
   const token = cookies().get(SESSION_COOKIE)?.value;
   if (!token) return null;
 
@@ -159,7 +169,7 @@ export async function currentUser(): Promise<SessionUser | null> {
 
   const { sessionVersion: _sessionVersion, ...session } = user;
   return session;
-}
+});
 
 /**
  * Revokes every session the user has, including the caller's own.

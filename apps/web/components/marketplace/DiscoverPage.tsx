@@ -24,6 +24,8 @@ export function DiscoverPage({
   pieces: catalogue,
   place,
   saved,
+  page,
+  hasMore,
 }: {
   stream: DiscoverStream;
   q?: string;
@@ -32,6 +34,8 @@ export function DiscoverPage({
   place: { city: string; radiusKm: number };
   /** Ids this viewer has saved. Empty for a signed-out visitor. */
   saved: string[];
+  page: number;
+  hasMore: boolean;
 }) {
   const [medium, setMedium] = useState<string | null>(null);
   const [maxPrice, setMaxPrice] = useState(PRICE_BAND.max);
@@ -227,6 +231,7 @@ export function DiscoverPage({
         {stream.awaiting ? (
           <p className="cg-feed__awaiting">{stream.awaiting}</p>
         ) : pieces.length ? (
+          <>
           <div className="cg-masonry">
             {pieces.map((piece, index) => [
               /* Dealt into the third slot, so it lands mid-fold rather than
@@ -240,6 +245,15 @@ export function DiscoverPage({
               />,
             ])}
           </div>
+          {hasMore ? (
+            <p className="cg-feed__more">
+              <Link href={`${stream.href}?${new URLSearchParams({ ...(q ? { q } : {}), page: String(page + 1) })}`}
+                    className="cg-btn cg-btn--outline">
+                Show more
+              </Link>
+            </p>
+          ) : null}
+          </>
         ) : (
           <p className="cg-feed__awaiting">
             {q?.trim()

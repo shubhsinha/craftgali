@@ -15,8 +15,12 @@ import {
   type SkinDraft,
 } from "@/lib/skins";
 import type { Piece, SkinId, SkinMode, Studio } from "@/lib/types";
+import { useFormState } from "react-dom";
+import { publishSkinAction } from "@/lib/actions/storefront";
+import type { ListingState } from "@/lib/plans";
 import { AtelierPreview } from "./AtelierPreview";
 import { HandoverPanel } from "./HandoverPanel";
+import { ShopDetailsPanel } from "./ShopDetailsPanel";
 
 /**
  * S9 — the storefront editor.
@@ -36,6 +40,11 @@ export function StorefrontEditor({
   pieces,
   citySlug,
   neighbourhood,
+  publishedSkin,
+  tagline,
+  bio,
+  coverId,
+  avatarId,
   pro,
 }: {
   studio: Studio;
@@ -43,15 +52,18 @@ export function StorefrontEditor({
   /** The shop's stored handover location — editable here, and nowhere else. */
   citySlug: string | null;
   neighbourhood: string;
+  /** What the row actually says — the comp may say otherwise, and loses. */
+  publishedSkin: SkinDraft;
+  tagline: string;
+  bio: string;
+  coverId: string | null;
+  avatarId: string | null;
   /** From the seller's plan. Hard-coded false until billing exists. */
   pro: boolean;
 }) {
   /* What the storefront is actually serving right now. */
-  const published: SkinDraft = {
-    hue: studio.skin,
-    mode: studio.mode ?? "light",
-    heritage: DEFAULT_HERITAGE,
-  };
+  const published = publishedSkin;
+  const [publish, publishState] = useFormState(publishSkinAction, null as ListingState);
 
   const [draft, setDraft] = useState<SkinDraft>(published);
   const [restored, setRestored] = useState(false);
@@ -98,6 +110,16 @@ export function StorefrontEditor({
   }
 
   const dirty = JSON.stringify(draft) !== JSON.stringify(published);
+
+  /* A publish that landed makes the browser draft stale — clear it so a reload
+     does not "restore" a draft identical to what is now live. */
+  useEffect(() => {
+    if (publish?.done) {
+      try { localStorage.removeItem(key); } catch { /* fine */ }
+      setRestored(false);
+    }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [publish?.done]);
   const needsPro = !skinIsAvailable(draft.hue, pro);
 
   return (
@@ -116,19 +138,23 @@ export function StorefrontEditor({
           <Link href={`/artist/${studio.handle}`} className="cg-btn cg-btn--outline">
             Preview as buyer
           </Link>
-          <button type="button" className="cg-btn cg-btn--solid" disabled title="Publishing is still being built">
-            Publish changes
-          </button>
+          <form action={publishState}>
+            <input type="hidden" name="hue" value={draft.hue} />
+            <input type="hidden" name="mode" value={draft.mode} />
+            {HERITAGE_LAYERS.map((layer) => (
+              <input key={layer.id} type="hidden" name={`heritage.${layer.id}`}
+                     value={draft.heritage[layer.id] ? "on" : "off"} />
+            ))}
+            <button type="submit" className="cg-btn cg-btn--solid" disabled={!dirty || needsPro}
+                    title={needsPro ? "This hue needs Pro Studio" : !dirty ? "Nothing to publish" : undefined}>
+              Publish changes
+            </button>
+          </form>
         </div>
       </header>
 
-      <p className="cg-editor__pending">
-        <strong>Publishing isn&rsquo;t wired up yet.</strong> Everything on this page is
-        live and yours to play with, and your choices are remembered in this browser —
-        but your public storefront still serves{" "}
-        <strong>{SKINS[published.hue].name}</strong> in {published.mode} mode until the
-        backend for this lands.
-      </p>
+      {publish?.error ? <p className="cg-form__error" role="alert">{publish.error}</p> : null}
+      {publish?.done ? <p className="cg-form__done" role="status">{publish.done}</p> : null}
 
       <div className="cg-editor__grid">
         <div className="cg-editor__left">
@@ -204,6 +230,7 @@ export function StorefrontEditor({
           {/* Unlike the hue and the ornament above, this one is not a draft:
               it writes straight through, because a wrong city is not a matter of
               taste — it is a shop nobody can find. */}
+          <ShopDetailsPanel tagline={tagline} bio={bio} coverId={coverId} avatarId={avatarId} />
           <HandoverPanel city={citySlug} neighbourhood={neighbourhood} />
         </div>
 

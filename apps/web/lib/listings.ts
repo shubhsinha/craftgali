@@ -117,6 +117,51 @@ export function rowToPiece(row: ListingRow): Piece {
   };
 }
 
+/** How many real listings a feed request fetches. Comp pieces ride behind. */
+export const FEED_PAGE = 48;
+
+export interface FeedQuery {
+  stream?: Stream;
+  /** Only shops in these cities — the buyer's radius resolved to city slugs. */
+  cities?: string[];
+  q?: string;
+  page?: number;
+}
+
+/**
+ * One page of the feed, filtered in Postgres.
+ *
+ * The first version loaded every live listing on every request and let the
+ * browser filter — fine at a hundred rows, a full table scan and a megabyte of
+ * JSON at a hundred thousand. This pushes stream, city and the search term into
+ * the query, pages it, and leans on idx_listings_feed.
+ */
+export async function feedPage(opts: FeedQuery = {}): Promise<{ pieces: Piece[]; hasMore: boolean }> {
+  const page = Math.max(0, opts.page ?? 0);
+  const where: string[] = ["l.status in ('live','sold')", "s.status = 'active'"];
+  const params: unknown[] = [];
+
+  if (opts.stream) { params.push(opts.stream); where.push(`l.stream = $${params.length}`); }
+  if (opts.cities?.length) { params.push(opts.cities); where.push(`s.city_slug = any($${params.length}::text[])`); }
+  if (opts.q?.trim()) {
+    params.push(`%${opts.q.trim()}%`);
+    where.push(`(l.title ilike $${params.length} or l.medium ilike $${params.length} or s.name ilike $${params.length})`);
+  }
+
+  params.push(FEED_PAGE + 1, page * FEED_PAGE);
+  const rows = await query<ListingRow>(
+    `${SELECT_LISTING} where ${where.join(" and ")}
+      order by l.created_at desc
+      limit $${params.length - 1} offset $${params.length}`,
+    params,
+  );
+
+  return {
+    pieces: rows.slice(0, FEED_PAGE).map(rowToPiece),
+    hasMore: rows.length > FEED_PAGE,
+  };
+}
+
 /** Everything a buyer may see: live and sold, never drafts or archived. */
 export async function livePieces(): Promise<Piece[]> {
   const rows = await query<ListingRow>(

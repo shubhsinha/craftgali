@@ -339,3 +339,83 @@
   .cg-editor__title { font-size: 25px; }
   .cg-skins { grid-template-columns: 1fr; }
 }
+
+/* ------------------------------------------------------ shop details --- */
+
+.cg-details { padding: 22px 24px 24px; }
+
+.cg-details__note {
+  max-width: 64ch;
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--cg-ink-mut);
+}
+
+.cg-details__form { margin-top: 16px; max-width: 560px; }
+.cg-details__form .cg-btn { width: auto; }
+
+.cg-details textarea {
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--cg-ink);
+  background: var(--cg-solid);
+  border: 1px solid var(--cg-edge);
+  outline: none;
+  resize: vertical;
+}
+
+.cg-details textarea:focus { border-color: var(--cg-hue); }
+
+.cg-details__media {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--cg-edge-soft);
+}
+
+.cg-slot-media { display: flex; flex-direction: column; gap: 10px; }
+
+.cg-slot-media__frame {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--cg-r-panel);
+  background: var(--cg-surface);
+  border: 1px dashed var(--cg-edge);
+}
+
+.cg-slot-media__frame:hover { border-color: var(--cg-hue); }
+.cg-slot-media--cover .cg-slot-media__frame { aspect-ratio: 21 / 9; }
+.cg-slot-media--avatar .cg-slot-media__frame { aspect-ratio: 1; border-radius: 50%; }
+.cg-slot-media__frame img { width: 100%; height: 100%; object-fit: cover; }
+
+.cg-slot-media__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 90px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cg-ink-mut);
+}
+
+.cg-slot-media__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cg-slot-media__label { font-size: 12.5px; font-weight: 700; }
+.cg-slot-media__row .cg-btn { width: auto; padding: 8px 16px; font-size: 12px; }
+
+@media (max-width: 720px) {
+  .cg-details__media { grid-template-columns: 1fr; }
+}

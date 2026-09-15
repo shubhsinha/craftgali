@@ -141,21 +141,21 @@ async function upsertStorefront(ownerId, { shop, handle, categories, area, cityS
  * zeros, which is the honest answer for a shop that has sold nothing.
  */
 const SALES = [
-  { handle: "anaya", title: "Kharadi Skyline in Rain", medium: "Oil on canvas", size: "100×70 cm", price: 14500, stream: "art",
+  { handle: "anaya", title: "Baner Road at Dusk", medium: "Oil on canvas", size: "100×70 cm", price: 14500, stream: "art",
     buyer: "rhea@craftgali.dev", stars: 5, body: "Bigger in person than I expected, and the light in it is exactly what the photographs promised. Anaya met me at the mall atrium and waited while I looked at it properly." },
-  { handle: "anaya", title: "Two Umbrellas, One Rickshaw", medium: "Oil on canvas", size: "75×50 cm", price: 9200, stream: "art",
+  { handle: "anaya", title: "Shivajinagar, First Rain", medium: "Oil on canvas", size: "75×50 cm", price: 9200, stream: "art",
     buyer: "kabir@craftgali.dev", stars: 5, body: "Second piece I've bought from her. Replies fast, no haggling games." },
-  { handle: "anaya", title: "Study for a Grey Afternoon", medium: "Oil on board", size: "30×25 cm", price: 2600, stream: "art",
+  { handle: "anaya", title: "Study for a Wet Morning", medium: "Oil on board", size: "30×25 cm", price: 2600, stream: "art",
     buyer: "aditi@craftgali.dev", stars: 4, body: "Lovely small work. Took a couple of days to agree a time, but she was straightforward about it." },
 
-  { handle: "meera", title: "Ash-Glaze Bowl, Set of Three", medium: "Stoneware", size: "16 cm across", price: 2900, stream: "decor",
+  { handle: "meera", title: "Tenmoku Tea Bowls, Pair", medium: "Stoneware", size: "16 cm across", price: 2900, stream: "decor",
     buyer: "aditi@craftgali.dev", stars: 5, body: "Three bowls, no two the same, and she packed them better than most shops would." },
-  { handle: "meera", title: "Chapel Road Tumbler, Pair", medium: "Stoneware", size: "11 cm tall", price: 1150, stream: "decor",
+  { handle: "meera", title: "Carter Road Mugs, Set of Four", medium: "Stoneware", size: "11 cm tall", price: 1150, stream: "decor",
     buyer: "farhan@craftgali.dev", stars: 5, body: "Used them the same evening. Exactly the colour in the listing." },
 
-  { handle: "nilambari", title: "Sixteen-Dip Yardage", medium: "Cotton, natural indigo", size: "2.5 m", price: 5400, stream: "decor",
+  { handle: "nilambari", title: "Twelve-Dip Yardage", medium: "Cotton, natural indigo", size: "2.5 m", price: 5400, stream: "decor",
     buyer: "rhea@craftgali.dev", stars: 5, body: "The blue is astonishing and it smells of indigo still. Couriered at cost, arrived in four days." },
-  { handle: "nilambari", title: "Block-Print Sampler, Framed", medium: "Indigo, madder", size: "40×40 cm", price: 2700, stream: "decor",
+  { handle: "nilambari", title: "Ajrakh Cushion Panel, Pair", medium: "Indigo, madder", size: "40×40 cm", price: 2700, stream: "decor",
     buyer: "kabir@craftgali.dev", stars: 4, body: "Beautiful work. The frame is plainer than I'd have picked, which they did say." },
 
   { handle: "kumbhcraft", title: "Brass Diya, Set of Five", medium: "Brass", size: "9 cm", price: 1800, stream: "decor",

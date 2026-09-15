@@ -35,6 +35,10 @@ export const LIMITS = {
   updateShop: { max: 20, windowSec: 60 * 60 },
   save: { max: 200, windowSec: 60 * 60 },
   review: { max: 20, windowSec: 60 * 60 },
+  follow: { max: 200, windowSec: 60 * 60 },
+  shopDetails: { max: 30, windowSec: 60 * 60 },
+  shopMedia: { max: 20, windowSec: 60 * 60 },
+  publishSkin: { max: 30, windowSec: 60 * 60 },
 } satisfies Record<string, Limit>;
 
 /**

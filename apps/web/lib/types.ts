@@ -87,6 +87,11 @@ export interface Studio {
   place?: string;
   /** Cover photo seed for the storefront hero, if the shop has set one. */
   cover?: number;
+  /** Uploaded cover and avatar, served from /api/media/[id]. Real shops only. */
+  coverId?: string;
+  avatarId?: string;
+  /** The published ornament toggles. Comp studios take the default. */
+  heritage?: Record<string, boolean>;
   /** The storefront's own filter rail — the artist names their own groupings. */
   collections?: string[];
   wall?: { question: string; answered: string }[];

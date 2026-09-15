@@ -376,3 +376,5 @@
   .cg-masonry { column-count: 1; }
   .cg-feed__title { font-size: 26px; }
 }
+
+.cg-feed__more { display: flex; justify-content: center; margin-top: 8px; }

@@ -135,6 +135,17 @@ export function nearestCity(point: { lat: number; lng: number }) {
   return { city: best, km: bestKm };
 }
 
+/**
+ * Every listed city whose centre is within the radius of a point.
+ *
+ * Distance is city-to-city, so "within 25 km" is really "shops in these
+ * cities" — and that is a set Postgres can filter on with an index, instead of
+ * measuring every row after the fact.
+ */
+export function citiesWithin(point: { lat: number; lng: number }, radiusKm: number) {
+  return CITIES.filter((city) => distanceKm(point, city) <= radiusKm).map((city) => city.slug);
+}
+
 /** "1.2 km" close up, whole kilometres after that. */
 export function formatKm(km: number) {
   if (km < 1) return "under 1 km";

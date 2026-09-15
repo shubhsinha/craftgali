@@ -1,22 +1,21 @@
 import Link from "next/link";
-import { AmbientGlows, HeritageTapestry } from "@/components/brand/Heritage";
+import { AmbientGlows, HeritageTapestry, HeroMedallion, JaliCorners, ToranDivider } from "@/components/brand/Heritage";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { placeholder } from "@/lib/media";
-import type { Piece } from "@/lib/types";
+import { cityBySlug } from "@/lib/cities";
+import { DEFAULT_HERITAGE, SKINS } from "@/lib/skins";
 import type { Review, ShopRating } from "@/lib/reviews";
-import { SKINS } from "@/lib/skins";
-import type { Studio } from "@/lib/types";
-import { WorkCard } from "./WorkCard";
+import type { Piece, Studio } from "@/lib/types";
+import { FollowButton } from "./FollowButton";
+import { Shelf } from "./Shelf";
 
 /**
  * P8 — the artist's own shop at /artist/<handle>.
  *
- * The whole page hangs under one wrapper carrying the shop's `data-hue` and
- * `data-mode`. Those are the same attributes the buyer sets on <html>, so every
- * --cg-* token resolves to the artist's colourway from here down and the shell
- * above is untouched: a buyer browsing in Teal still sees a Ruby shop as its
- * maker built it. Nothing else about the layout varies by skin — the design
- * puts the artist's choice in the light, not in the grid.
+ * Everything on it is either the maker's own (their words, their pictures, their
+ * published skin) or counted from real rows (pieces, followers, reviews). The
+ * comp used to state numbers here — "31 live", "replies in 2h" — and a real
+ * shop cannot earn those, so they are gone rather than faked.
  */
 export function StorefrontPage({
   studio,
@@ -24,21 +23,33 @@ export function StorefrontPage({
   sold,
   rating,
   reviews,
+  followers,
+  following,
+  viewerIsOwner,
 }: {
   studio: Studio;
   live: Piece[];
   sold: Piece[];
-  /** Derived from rows in `reviews`. Nothing here is a stated figure. */
   rating: ShopRating;
   reviews: Review[];
+  followers: number;
+  following: boolean;
+  viewerIsOwner: boolean;
 }) {
   const skin = SKINS[studio.skin];
+  const heritage = { ...DEFAULT_HERITAGE, ...(studio.heritage ?? {}) };
+  const city = cityBySlug(studio.citySlug);
+
+  const cover = studio.coverId
+    ? `/api/media/${studio.coverId}`
+    : placeholder(studio.cover ?? studio.seed, 1400, 520);
+  const avatar = studio.avatarId ? `/api/media/${studio.avatarId}` : placeholder(studio.seed, 160, 160);
 
   return (
     <div className="cg-front cg-skinned" data-hue={studio.skin} data-mode={studio.mode ?? "light"}>
       <div className="cg-skinned__ground" aria-hidden="true">
         <AmbientGlows />
-        <HeritageTapestry idPrefix="sk" />
+        {heritage.tapestry ? <HeritageTapestry idPrefix="sk" /> : null}
       </div>
 
       <div className="cg-front__bar">
@@ -49,42 +60,47 @@ export function StorefrontPage({
       </div>
 
       <header className="cg-front__hero">
-        <div
-          className="cg-front__cover"
-          style={{ backgroundImage: `url(${placeholder(studio.cover ?? studio.seed, 1400, 520)})` }}
-        />
+        <div className="cg-front__cover" style={{ backgroundImage: `url(${cover})` }} />
         <span className="cg-front__wash" aria-hidden="true" />
 
         <div className="cg-front__over">
-          <span
-            className="cg-front__face"
-            role="img"
-            aria-label={studio.artist}
-            style={{ backgroundImage: `url(${placeholder(studio.seed, 160, 160)})` }}
-          />
+          {heritage.medallion ? <HeroMedallion /> : null}
+          {heritage.jali ? <JaliCorners /> : null}
+
+          <span className="cg-front__face" role="img" aria-label={studio.artist}
+                style={{ backgroundImage: `url(${avatar})` }} />
 
           <div className="cg-front__ident">
             <p className="cg-front__place">{studio.place ?? studio.city}</p>
             <h1 className="cg-front__name">{studio.name}</h1>
 
+            {/* What they make and where they hand over — the two things a buyer
+                needs before anything else, and both come straight from the row. */}
+            <p className="cg-front__makes">
+              {studio.discipline}
+              {studio.neighbourhood || city ? (
+                <> · hands over around {[studio.neighbourhood, city?.name].filter(Boolean).join(", ")}</>
+              ) : null}
+            </p>
+
             <div className="cg-front__badges">
-              {studio.verifiedMaker ? (
-                <span className="cg-badge cg-badge--solid">Verified Maker</span>
-              ) : null}
-              {studio.verifiedArtist ? (
-                <span className="cg-badge">Verified Artist · ID checked</span>
-              ) : null}
+              {studio.verifiedMaker ? <span className="cg-badge cg-badge--solid">Verified Maker</span> : null}
+              {studio.verifiedArtist ? <span className="cg-badge">Verified Artist · ID checked</span> : null}
               {studio.tier ? <span className="cg-badge">{studio.tier}</span> : null}
             </div>
           </div>
 
           <div className="cg-front__actions">
-            <Link href={`/messages?to=${studio.handle}`} className="cg-btn cg-btn--solid">
-              Message {studio.shortName}
-            </Link>
-            <button type="button" className="cg-btn cg-btn--outline">
-              Follow
-            </button>
+            {viewerIsOwner ? (
+              <Link href="/sell/storefront" className="cg-btn cg-btn--solid">Edit your shop</Link>
+            ) : (
+              <>
+                <Link href={`/messages?to=${studio.handle}`} className="cg-btn cg-btn--solid">
+                  Message {studio.shortName}
+                </Link>
+                <FollowButton handle={studio.handle} following={following} count={followers} />
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -93,40 +109,24 @@ export function StorefrontPage({
       {studio.blurb ? <p className="cg-front__blurb">{studio.blurb}</p> : null}
 
       <dl className="cg-front__stats">
-        <Stat figure={studio.stats.live} label="Pieces live" />
-        <Stat figure={studio.stats.sold} label="Sold" />
-        <Stat
-          figure={rating.rating ?? "—"}
-          label={rating.count ? `${rating.count} ${rating.count === 1 ? "review" : "reviews"}` : "No reviews yet"}
-        />
-        <Stat figure={studio.stats.repliesIn} label="Replies in" />
+        <Stat figure={live.length} label="For sale" />
+        <Stat figure={sold.length} label="Sold" />
+        <Stat figure={rating.rating ?? "—"}
+              label={rating.count ? `${rating.count} ${rating.count === 1 ? "review" : "reviews"}` : "No reviews yet"} />
+        <Stat figure={followers} label={followers === 1 ? "Follower" : "Followers"} />
       </dl>
 
-      {studio.collections?.length ? (
-        <nav className="cg-front__tabs" aria-label="Collections">
-          {studio.collections.map((name, index) => (
-            <button key={name} type="button" className="cg-chip" aria-pressed={index === 0}>
-              {name}
-            </button>
-          ))}
-        </nav>
-      ) : null}
+      {heritage.toran ? <ToranDivider /> : null}
 
-      {!live.length && !sold.length ? (
-        <p className="cg-front__empty">
-          {studio.shortName} hasn&rsquo;t listed anything yet. Follow the shop and
-          you&rsquo;ll see the first piece when it lands.
-        </p>
-      ) : null}
-
-      <div className="cg-front__grid">
-        {live.map((piece) => (
-          <WorkCard key={piece.id} piece={piece} />
-        ))}
-        {sold.map((piece) => (
-          <WorkCard key={piece.id} piece={piece} />
-        ))}
-      </div>
+      <Shelf
+        live={live}
+        sold={sold}
+        empty={
+          viewerIsOwner
+            ? "Your shelf is empty. List a piece and it appears here the moment it's live."
+            : `${studio.shortName} hasn't listed anything yet. Follow the shop and you'll see the first piece when it lands.`
+        }
+      />
 
       {reviews.length || studio.wall?.length ? (
         <>
@@ -134,24 +134,16 @@ export function StorefrontPage({
           <div className="cg-front__foot">
             {reviews.length ? (
               <section>
-                <h2 className="cg-front__label">
-                  {reviews.length === 1 ? "One review" : `${reviews.length} reviews`}
-                </h2>
+                <h2 className="cg-front__label">{reviews.length === 1 ? "One review" : `${reviews.length} reviews`}</h2>
                 <ul className="cg-front__reviews">
                   {reviews.map((review) => (
                     <li key={review.id}>
                       <p className="cg-front__reviewstars" aria-label={`${review.stars} out of 5`}>
-                        <span aria-hidden="true">{"\u2605".repeat(review.stars)}</span>
-                        <span aria-hidden="true" className="cg-review__dim">
-                          {"\u2605".repeat(5 - review.stars)}
-                        </span>
+                        <span aria-hidden="true">{"★".repeat(review.stars)}</span>
+                        <span aria-hidden="true" className="cg-review__dim">{"★".repeat(5 - review.stars)}</span>
                       </p>
-                      {review.body ? (
-                        <p className="cg-front__reviewbody">&ldquo;{review.body}&rdquo;</p>
-                      ) : null}
-                      <p className="cg-front__reviewby">
-                        {review.by} · bought {review.piece}
-                      </p>
+                      {review.body ? <p className="cg-front__reviewbody">&ldquo;{review.body}&rdquo;</p> : null}
+                      <p className="cg-front__reviewby">{review.by} · bought {review.piece}</p>
                     </li>
                   ))}
                 </ul>
@@ -164,23 +156,16 @@ export function StorefrontPage({
                 {studio.wall.map((entry) => (
                   <p key={entry.question} className="cg-front__wall">
                     &ldquo;{entry.question}&rdquo; —{" "}
-                    <span className="cg-front__wallwhen">
-                      {studio.shortName} replied {entry.answered}
-                    </span>
+                    <span className="cg-front__wallwhen">{studio.shortName} replied {entry.answered}</span>
                   </p>
                 ))}
-                <Link href={`/messages?to=${studio.handle}`} className="cg-front__ask">
-                  Ask {studio.shortName} something
-                </Link>
               </section>
             ) : null}
           </div>
         </>
       ) : null}
 
-      <p className="cg-front__skin">
-        {skin.name} · {skin.tagline}
-      </p>
+      <p className="cg-front__skin">{skin.name} · {skin.tagline}</p>
     </div>
   );
 }

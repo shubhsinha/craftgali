@@ -306,3 +306,41 @@
 .cg-front__reviews { display: flex; flex-direction: column; gap: 20px; }
 .cg-front__reviews li + li { padding-top: 20px; border-top: 1px solid var(--cg-edge-soft); }
 .cg-front__reviews .cg-front__reviewbody { margin-top: 6px; font-size: 17px; }
+
+/* --- what they make, where they hand over ---------------------------------- */
+
+.cg-front__makes {
+  margin: 4px 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cg-ink-mut);
+}
+
+.cg-front__tabn {
+  margin-left: 5px;
+  padding: 1px 7px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--cg-ink-mut);
+  background: var(--cg-edge-soft);
+}
+
+.cg-chip[aria-pressed="true"] .cg-front__tabn { color: var(--cg-hue); }
+
+.cg-follow__count {
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cg-ink-mut);
+  background: var(--cg-edge-soft);
+}
+
+/* The medallion and jali now live inside the hero panel, over the cover. */
+.cg-front__over { position: relative; overflow: hidden; }
+.cg-front__over .cg-medallion { top: -220px; width: 520px; height: 520px; opacity: 0.12; }
+.cg-front__over .cg-jali { width: 54px; height: 54px; }
+.cg-front__over > :not(.cg-medallion):not(.cg-jali) { position: relative; z-index: 1; }
+.cg-front .cg-toran { margin-top: 26px; }
